@@ -20,8 +20,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="application-pfe_main" target="1.5" />
-      <module name="application-pfe_test" target="1.5" />
+      <module name="application-pfe_main" target="1.8" />
+      <module name="application-pfe_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
