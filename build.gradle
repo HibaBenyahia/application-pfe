@@ -13,5 +13,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'org.jdom:jdom2:2.0.6'
     compile 'com.univocity:univocity-parsers:2.0.2'
+    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
 }
 

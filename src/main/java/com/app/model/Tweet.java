@@ -132,9 +132,35 @@ public class Tweet {
                 ", date=" + date +
                 ", favoris=" + favoris +
                 ", langue='" + langue + '\'' +
-                ", placename='" + placename + '\'' +
+                ", placename='" + (placename==null?"":placename) + '\'' +
                 ", retweet=" + retweet +
                 ", sentiment=" + sentiment +
                 '}';
+    }
+
+    public Object[] toTableOfObjects(){
+        Object [] result = new Object[11];
+        result[0] = this.getId();
+        result[1] = this.getUser();
+        result[2] = this.getTweettext();
+        if (this.location == null){
+            result[3] = null;   //lat
+            result[4] = null;   //long
+        }else {
+            result[3] = location.getLatitude();    //lat
+            result[4] = location.getLongitude();   //long
+        }
+        result[5] = this.getDate().toString();
+        result[6] = this.getFavoris();
+        result[7] = this.getLangue();
+        if (this.placename == null){
+            result[8] = null;
+        }else{
+            result[8] = this.getPlacename();
+        }
+        result[9] = this.getRetweet();
+        result[10] = this.getSentiment();
+
+        return result;
     }
 }

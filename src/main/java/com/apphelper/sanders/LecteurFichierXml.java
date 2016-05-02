@@ -85,7 +85,7 @@ public class LecteurFichierXml {
 
             }
             Element placeElemnt = elementTweet.getChild("placename");
-            String placename = "";
+            String placename = null;
             if (placeElemnt != null) {
                 placename = elementTweet.getChildText("placename");
             }
