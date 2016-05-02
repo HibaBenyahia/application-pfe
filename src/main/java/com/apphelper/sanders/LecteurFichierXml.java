@@ -51,21 +51,17 @@ public class LecteurFichierXml {
     }
 
     /**
-     * Cette m�thode va lire tout les �l�ments du fichier xml et les mettre
+     * Cette methode va lire tout les elements du fichier xml et les mettre
      * dans la listeDeTweets
      */
     public void lireFichierDeTweet() {
 
-        System.out.println("la racine du fichier xml est : " + racine.getName());   //test de succ�s de la lecture
-
         Element nodeList = document.getRootElement();
-        //listeDeTweet = (List)nodeList.getChildren("tweet");
         List<Element> listElementTweet = nodeList.getChildren("tweet");
 
 
         for (Element elementTweet : listElementTweet) { //ici je suis dans l'elemnt <tweet> de mon fichier xml
 
-            //maintant madabik tsegmi les type ta3 hadoma pour faciliter la cr�ation de tweet apr�s
             String idTweet = elementTweet.getAttributeValue("id");
             String user = elementTweet.getChildText("user");
             String tweettext = elementTweet.getChildText("tweettext");
@@ -73,9 +69,7 @@ public class LecteurFichierXml {
 
 
             Location location = null;
-            if (locationElement == null) {
-                System.out.println("the location does not exist ! ");
-            } else {
+            if (locationElement != null) {
                 String latitude = elementTweet.getChild("location").getChildText("latitude");
                 String longitude = elementTweet.getChild("location").getChildText("longitude");
                 location = new Location(longitude, latitude); // c la derniere fois elli nakhdem m3ak b team :p
