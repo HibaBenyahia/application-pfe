@@ -20,28 +20,42 @@ public class MainUiController {
 
     private final String PANNEAU_CHARGEMENT = "panneau_chargement_donnees.fxml";
     private final String PANNEAU_NETTOYAGE = "panneau_nettoyage_donnees.fxml";
-
-
-    @FXML
-    private Button btnChargementDeDonnees;
-
-    @FXML
-    private Button btnNettoyageDeTweets;
+    private final String PANNEAU_EXTRACTION_CARACTERISTIQUE = "panneau_extraction_caracteritique.fxml";
+    private final String PANNEAU_APPRENTISSAGE = "panneau_apprentissage.fxml";
 
     @FXML
     private BorderPane panneauPrincipale;
+    @FXML
+    private Button btnChargementDeDonnees;
+    @FXML
+    private Button btnNettoyageDeTweets;
+    @FXML
+    private Button btnExtractionCaractertiques;
+    @FXML
+    private Button btnApprentissage;
 
     @FXML
     private void afficherPaneauChargementTweets() {
-        chargerUnNouceauPanneau(PANNEAU_CHARGEMENT);
+        chargerUnNouveauPanneau(PANNEAU_CHARGEMENT);
     }
 
     @FXML
     private void afficherPanneauNettoyageTweets() {
-        chargerUnNouceauPanneau(PANNEAU_NETTOYAGE);
+        chargerUnNouveauPanneau(PANNEAU_NETTOYAGE);
     }
 
-    private void chargerUnNouceauPanneau(String nomPanneau) {
+    @FXML
+    private void afficherPaneauExtractionCaracteristiques() {
+        chargerUnNouveauPanneau(PANNEAU_EXTRACTION_CARACTERISTIQUE);
+    }
+
+    @FXML
+    private void afficherPaneauApprentissage() {
+        chargerUnNouveauPanneau(PANNEAU_APPRENTISSAGE);
+    }
+
+
+    private void chargerUnNouveauPanneau(String nomPanneau) {
         try {
             //charger le panneau depuis son fichier fxml
             FXMLLoader fxmlLoader = new FXMLLoader(ClassLoader.getSystemClassLoader().getResource("fxml/" + nomPanneau));

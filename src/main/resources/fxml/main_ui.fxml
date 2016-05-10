@@ -56,9 +56,22 @@
                </content>
           </TitledPane>
           <TitledPane text="2 - Phase d'apprentissage">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
+               <content>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="btnExtractionCaractertiques" mnemonicParsing="false" onAction="#afficherPaneauExtractionCaracteristiques" prefHeight="54.0" prefWidth="176.0" text="Extraction des caratéristiques" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnApprentissage" mnemonicParsing="false" onAction="#afficherPaneauApprentissage" prefHeight="54.0" prefWidth="176.0" text="Apprentissage" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                     </children>
+                  </GridPane>
+               </content>
           </TitledPane>
           <TitledPane text="3 - Phase de teste">
             <content>

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -58,5 +59,6 @@
          </GridPane.margin>
       </Text>
       <Button fx:id="btnChargerLesDonnees" mnemonicParsing="false" onAction="#chargerLesDonnees" prefHeight="48.0" prefWidth="140.0" text="charger les tweets" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <ProgressBar fx:id="pbChargement" prefHeight="20.0" prefWidth="493.0" progress="0.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
    </children>
 </GridPane>

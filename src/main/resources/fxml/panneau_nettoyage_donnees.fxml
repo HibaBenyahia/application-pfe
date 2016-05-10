@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.ui.controllers.PanneauNettoyageDonnees">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -57,12 +57,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ToggleSwitch GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ToggleSwitch fx:id="tsSupprimerPonctuation" selected="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </ToggleSwitch>
-                  <ProgressBar prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
+                  <ProgressBar fx:id="pbSupprimerPonctuation" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
@@ -85,12 +85,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ToggleSwitch GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ToggleSwitch fx:id="tsSupprimerTweetsSupperflus" selected="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </ToggleSwitch>
-                  <ProgressBar prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
+                  <ProgressBar fx:id="pbSupprimerTweetsSupperflus" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
@@ -107,12 +107,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ToggleSwitch GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ToggleSwitch fx:id="tsSupprimerTweetsDupliques" selected="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </ToggleSwitch>
-                  <ProgressBar prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
+                  <ProgressBar fx:id="pbSupprimerTweetsDupliques" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
@@ -128,12 +128,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ToggleSwitch GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ToggleSwitch fx:id="tsSupprimerEmoticones" selected="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </ToggleSwitch>
-                  <ProgressBar prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
+                  <ProgressBar fx:id="pbSupprimerEmoticones" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
@@ -163,12 +163,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ToggleSwitch GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ToggleSwitch fx:id="tsEliminerMotVide" selected="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </ToggleSwitch>
-                  <ProgressBar prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
+                  <ProgressBar fx:id="pbEliminerMotVide" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
@@ -184,12 +184,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ToggleSwitch GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ToggleSwitch fx:id="tsSupprimerArobas" selected="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </ToggleSwitch>
-                  <ProgressBar prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
+                  <ProgressBar fx:id="pbSupprimerArobas" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
@@ -205,12 +205,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ToggleSwitch GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ToggleSwitch fx:id="tsSupprimerLiens" selected="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </ToggleSwitch>
-                  <ProgressBar prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
+                  <ProgressBar fx:id="pbSupprimerLiens" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
@@ -234,12 +234,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ToggleSwitch GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ToggleSwitch fx:id="tsNormaliserText" selected="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </ToggleSwitch>
-                  <ProgressBar prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
+                  <ProgressBar fx:id="pbNormaliserText" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
@@ -258,7 +258,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="156.0" text="Démarrer le nettoyage" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <Button fx:id="btnDemarrerNettoyage" mnemonicParsing="false" onAction="#demarrerNettoyage" prefHeight="42.0" prefWidth="156.0" text="Démarrer le nettoyage" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <Button fx:id="btnVoirExempleResultat" mnemonicParsing="false" onAction="#voirExempleResultat" prefHeight="42.0" prefWidth="189.0" text="Voir un exemple de résultat" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
          </children>
       </GridPane>
    </children>

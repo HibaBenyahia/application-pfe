@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="730.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="com.app.ui.controllers.PanneauApprentissageController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="154.9794158935547" minHeight="10.0" prefHeight="124.08882904052734" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="206.9317626953125" minHeight="10.0" prefHeight="71.62904357910156" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="221.95242309570312" minHeight="10.0" prefHeight="67.37095642089844" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="104.2830810546875" minHeight="10.0" prefHeight="66.2886962890625" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="104.2830810546875" minHeight="10.0" prefHeight="49.7113037109375" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="123.31936645507812" minHeight="10.0" prefHeight="72.27337646484375" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="123.31936645507812" minHeight="10.0" prefHeight="123.31936645507812" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Apprentissage" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1 - Création de vocabulaire" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Text>
+      <ProgressBar fx:id="pbConstructionVocabulaire" prefHeight="20.0" prefWidth="680.0" progress="0.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <ProgressBar fx:id="pbCalculProbabilite" prefHeight="20.0" prefWidth="682.0" progress="0.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2 - Calcul des probabilités" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Text>
+      <GridPane GridPane.rowIndex="6">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnCommencerApprentissage" mnemonicParsing="false" onAction="#commencerApprentissage" prefHeight="49.0" prefWidth="208.0" text="Commencer l'apprentissage" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnVoirExempleResultat" mnemonicParsing="false" onAction="#voireExempleResultat" prefHeight="49.0" prefWidth="208.0" text="Voir un exemple du resultat" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>
