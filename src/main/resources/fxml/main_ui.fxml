@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="panneauPrincipale" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.ui.controllers.MainUiController">
+<BorderPane fx:id="panneauPrincipale" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.ui.controllers.MainUiController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -35,9 +35,9 @@
       </MenuBar>
    </top>
    <left>
-      <Accordion BorderPane.alignment="CENTER">
+      <Accordion prefHeight="540.0" prefWidth="223.0" BorderPane.alignment="CENTER">
         <panes>
-          <TitledPane text="1 - Préparation de données">
+          <TitledPane prefHeight="550.0" text="1 - Préparation de données">
                <content>
                   <GridPane>
                     <columnConstraints>
@@ -49,8 +49,8 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="btnChargementDeDonnees" mnemonicParsing="false" onAction="#afficherPaneauChargementTweets" prefHeight="46.0" prefWidth="151.0" text="Chargement de données" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <Button fx:id="btnNettoyageDeTweets" mnemonicParsing="false" prefHeight="48.0" prefWidth="149.0" text="Nettoyage de tweets" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnChargementDeDonnees" mnemonicParsing="false" onAction="#afficherPaneauChargementTweets" prefHeight="46.0" prefWidth="173.0" text="Chargement de données" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnNettoyageDeTweets" mnemonicParsing="false" onAction="#afficherPanneauNettoyageTweets" prefHeight="48.0" prefWidth="168.0" text="Nettoyage de tweets" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </content>

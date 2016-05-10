@@ -14,4 +14,6 @@ dependencies {
     compile 'org.jdom:jdom2:2.0.6'
     compile 'com.univocity:univocity-parsers:2.0.2'
     compile 'org.xerial:sqlite-jdbc:3.8.11.2'
+    compile 'org.controlsfx:controlsfx:8.40.10'
+    compile 'de.jensd:fontawesomefx:8.9'
 }

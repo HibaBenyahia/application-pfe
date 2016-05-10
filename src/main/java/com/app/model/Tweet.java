@@ -39,6 +39,10 @@ public class Tweet {
         this.sentiment = sentiment;
     }
 
+    public Tweet() {
+
+    }
+
     public String getUser() {
         return user;
     }

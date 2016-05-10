@@ -7,7 +7,7 @@ import com.apphelper.EnregistreurFichierCsv;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
-import java.io.*;
+import static com.app.helper.FileHelper.getReader;
 
 /**
  * Created by Oussama on 02/05/2016.
@@ -39,14 +39,4 @@ public class TransformateurCsv {
         enregistreurFichierCsv.saveAndClose( Statics.SENTIMENT140_LEARNING_DATASET );
     }
 
-    public Reader getReader(String relativePath) {
-        try {
-            InputStream ips = new FileInputStream( relativePath );
-            InputStreamReader isr = new InputStreamReader(ips, "UTF-8");
-
-            return isr;
-        } catch (UnsupportedEncodingException | FileNotFoundException e) {
-            throw new IllegalStateException("Unable to read input", e);
-        }
-    }
 }

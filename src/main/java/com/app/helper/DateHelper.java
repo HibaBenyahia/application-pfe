@@ -23,7 +23,7 @@ public class DateHelper {
             //System.out.println(formatter.format(dateARetourner));
 
         } catch (ParseException e) {
-            e.printStackTrace();
+            ErrorHelper.showErrorDialog( e );
         }
 
         return  dateARetourner;
