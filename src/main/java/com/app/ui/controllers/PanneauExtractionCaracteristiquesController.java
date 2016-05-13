@@ -6,7 +6,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 
 /**
- * Created by Oussama on 10/05/2016.
+ * Created by hiba on 10/05/2016.
  */
 public class PanneauExtractionCaracteristiquesController {
 

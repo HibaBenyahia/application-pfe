@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 
 /**
- * Created by Oussama on 10/05/2016.
+ * Created by hiba on 10/05/2016.
  */
 public class PanneauApprentissageController {
     @FXML

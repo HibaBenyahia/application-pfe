@@ -12,6 +12,7 @@ public class Statics {
 
     public static final int NUMBER_OF_TWEETS_OF_SANDERS_DATASET = 4501;
     public static final int NUMBER_OF_TWEETS_OF_SENTIMENT_DATASET = 1_600_000;
+    public static final int NOMBRE_DE_TWEETS_SANDER = 4500;
 
     public static final Pipeline PIPELINE = new Pipeline();
 

@@ -43,6 +43,14 @@ public class Tweet {
 
     }
 
+    public Tweet(String id, String user, String tweettext, String langue, double sentiment) {
+        this.id = id;
+        this.user = user;
+        this.tweettext = tweettext;
+        this.langue = langue;
+        this.sentiment = sentiment;
+    }
+
     public String getUser() {
         return user;
     }

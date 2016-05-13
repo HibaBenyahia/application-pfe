@@ -2,6 +2,8 @@ package com.app.ui.controllers;
 
 import com.app.helper.ErrorHelper;
 import com.app.model.Tweet;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,8 +12,12 @@ import javafx.scene.control.ProgressBar;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.ToggleSwitch;
 
+import static com.app.helper.NotificationHelper.showNotification;
+import static com.app.helper.Statics.NOMBRE_DE_TWEETS_SANDER;
+import static com.app.helper.Statics.PIPELINE;
+
 /**
- * Created by Oussama on 10/05/2016.
+ * Created by hiba on 10/05/2016.
  */
 public class PanneauNettoyageDonnees {
 
@@ -64,7 +70,8 @@ public class PanneauNettoyageDonnees {
 
     @FXML
     private void demarrerNettoyage(){
-        System.out.println("Demarrage de nettpyage..");
+        TaskNettoyeurDeTweet taskNettoyeurDeTweet = new TaskNettoyeurDeTweet();
+        new Thread(taskNettoyeurDeTweet).start();
     }
 
     @FXML
@@ -97,6 +104,37 @@ public class PanneauNettoyageDonnees {
 
         } catch (Exception e) {
             ErrorHelper.showErrorDialog( e );
+        }
+    }
+
+    //une classe qui comporte 8 methodes
+    private class TaskNettoyeurDeTweet extends Task{
+
+        @Override
+        protected Object call() throws Exception {
+
+            eleminerLesTweetsSupperflus();
+
+
+            return null;
+        }
+
+        private void eleminerLesTweetsSupperflus() {
+
+            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissage().size() ; i++) {
+                Tweet tweetdApprentissage = PIPELINE.getListeDeTweetsApprentissage().get(i);
+                if( ! tweetdApprentissage.getLangue().equals("en")){
+                    PIPELINE.supprimerLeTweetDapprentissage( tweetdApprentissage );
+                }
+                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+                Platform.runLater(() -> pbSupprimerTweetsSupperflus.setProgress(progress));
+            }
+        }
+
+        @Override
+        protected void succeeded(){
+            super.succeeded();
+            showNotification("Suppression des tweets supperflus a été terminé avec succès !");
         }
     }
 }

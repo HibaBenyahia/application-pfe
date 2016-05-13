@@ -1,5 +1,6 @@
 package com.app.model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -7,14 +8,34 @@ import javafx.collections.ObservableList;
  */
 public class Pipeline {
 
-    private ObservableList<Tweet> listeDeTweetsDePipeline;
+    private ObservableList<Tweet> listeDeTweetsApprentissage;
 
-
-    public ObservableList<Tweet> getListeDeTweetsDePipeline() {
-        return listeDeTweetsDePipeline;
+    public Pipeline() {
+        this.listeDeTweetsApprentissage = FXCollections.observableArrayList();
     }
 
-    public void setListeDeTweetsDePipeline(ObservableList<Tweet> listeDeTweetsDePipeline) {
-        this.listeDeTweetsDePipeline = listeDeTweetsDePipeline;
+    public ObservableList<Tweet> getListeDeTweetsApprentissage() {
+        return listeDeTweetsApprentissage;
+    }
+
+    public void setListeDeTweetsApprentissage(ObservableList<Tweet> listeDeTweetsApprentissage) {
+        this.listeDeTweetsApprentissage = listeDeTweetsApprentissage;
+    }
+
+    public void ajouterUnTweetdApprentissage(Tweet tweetApprentissage){
+        this.listeDeTweetsApprentissage.add( tweetApprentissage );
+    }
+
+
+    public void supprimerLeTweetDapprentissage(Tweet tweetASupprimer) {
+        //supprimer Tweets donc  nhkem un String et je le supprime ok !un tweet Tweet pakois st!ring ok
+        for(int i=0; i< listeDeTweetsApprentissage.size(); i++){
+
+            if(listeDeTweetsApprentissage.get(i).getId().equals(tweetASupprimer.getId())){
+                //ksk tu veux faire si les ids son les meme ?
+                listeDeTweetsApprentissage.remove(i);
+                break;
+            }
+        }
     }
 }

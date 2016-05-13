@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
 /**
- * Created by Oussama on 10/05/2016.
+ * Created by hiba on 10/05/2016.
  */
 public class PanneauPopupExempleNettoyage {
     @FXML
