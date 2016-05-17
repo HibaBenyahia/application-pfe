@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 import static com.app.helper.FileHelper.getReader;
 
 /**
- * Created by Oussama on 16/05/2016.
+ * Created by hiba on 16/05/2016.
  */
 public class LecteurFichierEmoticones {
 
@@ -19,7 +19,7 @@ public class LecteurFichierEmoticones {
         this.listeDesEmoticones = FXCollections.observableArrayList();
     }
 
-    void recupererLesEmoticones(){
+    public void recupererLesEmoticones(){
         CsvParserSettings settings = new CsvParserSettings();
         CsvParser parser = new CsvParser(settings);
         parser.beginParsing(getReader( ClassLoader.getSystemClassLoader().getResource("imoticones/emoticones.csv").getPath() ));

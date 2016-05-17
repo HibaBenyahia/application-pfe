@@ -30,6 +30,7 @@ public class LecteurFichierEmoticonesTest {
 
         String tweetText = "Saha :), Wechkom? cv? :'( khalitouniiii :p";
         System.out.println( "tweet avant nettoayge" + tweetText);
+
         for (Emoticone emoticone : lecteurFichierEmoticones.getListeDesEmoticones()) {
             tweetText = tweetText.replace( emoticone.getCode(), " ");
         }

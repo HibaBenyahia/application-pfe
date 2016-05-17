@@ -1,7 +1,9 @@
 package com.app.ui.controllers;
 
 import com.app.helper.ErrorHelper;
+import com.app.model.Emoticone;
 import com.app.model.Tweet;
+import com.app.temp.LecteurFichierEmoticones;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -118,7 +120,7 @@ public class PanneauNettoyageDonneesController {
             popOver.setTitle("Comparaison");
             popOver.setHeaderAlwaysVisible(true);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(ClassLoader.getSystemClassLoader().getResource("fxml/"+PANNEAU_POPUP_COMPARAISON_TWEETS));
+            FXMLLoader fxmlLoader = new FXMLLoader(ClassLoader.getSystemClassLoader().getResource("fxml/" + PANNEAU_POPUP_COMPARAISON_TWEETS));
             Parent root = (Parent) fxmlLoader.load();
 
 
@@ -129,14 +131,20 @@ public class PanneauNettoyageDonneesController {
             //popOver.setArrowLocation(PopOver.ArrowLocation.RIGHT_CENTER);
             //popOver.show( btnVoirExempleResultat );
 
-            Scene scene = new Scene( root );
+            Scene scene = new Scene(root);
             Stage fenetrecomparaison = new Stage();
-            fenetrecomparaison.setScene( scene );
+            fenetrecomparaison.setScene(scene);
             fenetrecomparaison.setTitle("Comparaison entre les tweets originaux et les tweets néttoyés");
             fenetrecomparaison.show();
 
+
+            System.out.println( "Liste des tweets originaux : ");
+            System.out.println( PIPELINE.getListeDeTweetsApprentissage().toString());
+            System.out.println( "Liste des tweets nettoyes : ");
+            System.out.println( PIPELINE.getListeDeTweetsApprentissageNettoye().toString());
+
         } catch (Exception e) {
-            ErrorHelper.showErrorDialog( e );
+            ErrorHelper.showErrorDialog(e);
         }
     }
 
@@ -148,7 +156,8 @@ public class PanneauNettoyageDonneesController {
 
             eleminerLesTweetsSupperflus();
             eliminerLesTweetsRepetes();
-
+            eliminerURL();
+            eliminerEmoticones();
             return null;
         }
 
@@ -162,6 +171,9 @@ public class PanneauNettoyageDonneesController {
                 double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
                 Platform.runLater(() -> pbSupprimerTweetsSupperflus.setProgress(progress));
             }
+
+            //mettre a jour le nombre de tweets de sanders
+            NOMBRE_DE_TWEETS_SANDER = PIPELINE.getListeDeTweetsApprentissageNettoye().size();
         }
 
         private void eliminerLesTweetsRepetes() {
@@ -188,9 +200,51 @@ public class PanneauNettoyageDonneesController {
                 Platform.runLater(() -> pbSupprimerTweetsDupliques.setProgress(progress));
             }
 
+            //mettre a jour le nombre de tweets de sanders
+            NOMBRE_DE_TWEETS_SANDER = PIPELINE.getListeDeTweetsApprentissageNettoye().size();
 
 
         }
+
+        private void eliminerEmoticones() {
+            // lire le fichier emoticones
+            LecteurFichierEmoticones lecteurFichierEmoticones = new LecteurFichierEmoticones();
+            lecteurFichierEmoticones.recupererLesEmoticones();
+
+            //parcours de la liste nettoye
+
+            //remplacer les emoticones dans chaque tweet nettoyé par un espace
+
+            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+
+                String textDeTweetCourant = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
+                for (Emoticone emoticone : lecteurFichierEmoticones.getListeDesEmoticones()) {
+                    //icic le remplacemeny, dsl nroh w nji  okokk ?vas yy a++a ++
+                    textDeTweetCourant = textDeTweetCourant.replace(emoticone.getCode(), " ");
+
+                }
+                PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext( textDeTweetCourant );
+
+                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+                Platform.runLater(() -> pbSupprimerEmoticones.setProgress(progress));
+            }
+        }
+        private void eliminerURL(){
+
+            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+             String tweetApprentissage = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
+                String urlPattern = "((https?|ftp|gopher|telnet|file|Unsure|http):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
+
+                String newChaineCharactere = tweetApprentissage.replaceAll(urlPattern, " ");
+                //mettre a jour la chaine de caractere du tweet dans la liste du pipeline
+                PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext(newChaineCharactere);
+                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+                Platform.runLater(() -> pbSupprimerLiens.setProgress(progress));
+
+            }
+
+            }
+
 
         @Override
         protected void succeeded() {

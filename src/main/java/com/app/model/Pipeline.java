@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Created by Oussama on 08/05/2016.
+ * Created by hiba on 08/05/2016.
  */
 public class Pipeline {
 
