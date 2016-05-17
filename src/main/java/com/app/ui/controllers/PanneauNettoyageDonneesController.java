@@ -7,8 +7,10 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.ToggleSwitch;
 
@@ -19,9 +21,10 @@ import static com.app.helper.Statics.PIPELINE;
 /**
  * Created by hiba on 10/05/2016.
  */
-public class PanneauNettoyageDonnees {
+public class PanneauNettoyageDonneesController {
 
     private final String PANNEAU_POPUP_EXEMPLE_NETTOYAGE = "panneau_popup_exemple_nettoyage.fxml";
+    private final String PANNEAU_POPUP_COMPARAISON_TWEETS = "panneau_popup_comparaison_liste_tweets.fxml";
 
     /*
     *  Les 8 Toggle Switch
@@ -104,6 +107,36 @@ public class PanneauNettoyageDonnees {
 
         } catch (Exception e) {
             ErrorHelper.showErrorDialog(e);
+        }
+    }
+
+    @FXML
+    private void showPopupComparaison() {
+        try {
+
+            PopOver popOver = new PopOver();
+            popOver.setTitle("Comparaison");
+            popOver.setHeaderAlwaysVisible(true);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(ClassLoader.getSystemClassLoader().getResource("fxml/"+PANNEAU_POPUP_COMPARAISON_TWEETS));
+            Parent root = (Parent) fxmlLoader.load();
+
+
+            PanneauPopupComparaisonListeTweetsController panneauPopupComparaisonListeTweetsController = fxmlLoader.getController();
+            panneauPopupComparaisonListeTweetsController.afficherLesListesDeTweets();
+
+            //popOver.setContentNode(root);
+            //popOver.setArrowLocation(PopOver.ArrowLocation.RIGHT_CENTER);
+            //popOver.show( btnVoirExempleResultat );
+
+            Scene scene = new Scene( root );
+            Stage fenetrecomparaison = new Stage();
+            fenetrecomparaison.setScene( scene );
+            fenetrecomparaison.setTitle("Comparaison entre les tweets originaux et les tweets néttoyés");
+            fenetrecomparaison.show();
+
+        } catch (Exception e) {
+            ErrorHelper.showErrorDialog( e );
         }
     }
 

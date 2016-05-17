@@ -37,7 +37,7 @@
    <left>
       <Accordion prefHeight="540.0" prefWidth="223.0" BorderPane.alignment="CENTER">
         <panes>
-          <TitledPane prefHeight="550.0" text="1 - Préparation de données">
+          <TitledPane fx:id="tpPreTraitement" prefHeight="550.0" text="1 - Préparation de données">
                <content>
                   <GridPane>
                     <columnConstraints>
@@ -55,7 +55,7 @@
                   </GridPane>
                </content>
           </TitledPane>
-          <TitledPane text="2 - Phase d'apprentissage">
+          <TitledPane fx:id="tpPhaseApprentissage" text="2 - Phase d'apprentissage">
                <content>
                   <GridPane>
                     <columnConstraints>

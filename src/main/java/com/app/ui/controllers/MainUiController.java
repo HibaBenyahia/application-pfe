@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 
@@ -33,6 +34,10 @@ public class MainUiController {
     private Button btnExtractionCaractertiques;
     @FXML
     private Button btnApprentissage;
+    @FXML
+    private TitledPane tpPreTraitement;
+    @FXML
+    private TitledPane tpPhaseApprentissage;
 
     @FXML
     private void afficherPaneauChargementTweets() {

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.ui.controllers.PanneauPopupComparaisonListeTweetsController">
+  <items>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tweets originaux" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </BorderPane.margin>
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+         </top>
+         <center>
+            <ListView fx:id="lvTweetsOriginaux" prefHeight="200.0" prefWidth="495.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tweets après le nettoyage" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </BorderPane.margin>
+            </Text>
+         </top>
+         <center>
+            <ListView fx:id="lvTweetsNettoyes" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+  </items>
+</SplitPane>

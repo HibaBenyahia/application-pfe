@@ -13,8 +13,6 @@ public class ErrorHelper {
         ExceptionDialog dlg = new ExceptionDialog( ex );
         dlg.getDialogPane().setHeaderText( "  Oooops !" );
         dlg.initStyle(StageStyle.DECORATED );
-        //dlg.getDialogPane().setGraphic(new ImageView(new Image(getClass().getResource("../controlsfx-logo.png").toExternalForm())));
         dlg.showAndWait().ifPresent(result -> System.out.println("Result is " + result));
     }
-
 }

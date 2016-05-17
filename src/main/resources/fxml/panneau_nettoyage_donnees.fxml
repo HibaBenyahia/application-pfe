@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.ui.controllers.PanneauNettoyageDonnees">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.ui.controllers.PanneauNettoyageDonneesController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -259,7 +259,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="btnDemarrerNettoyage" mnemonicParsing="false" onAction="#demarrerNettoyage" prefHeight="42.0" prefWidth="156.0" text="Démarrer le nettoyage" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-            <Button fx:id="btnVoirExempleResultat" mnemonicParsing="false" onAction="#voirExempleResultat" prefHeight="42.0" prefWidth="189.0" text="Voir un exemple de résultat" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <Button fx:id="btnVoirExempleResultat" mnemonicParsing="false" onAction="#showPopupComparaison" prefHeight="42.0" prefWidth="189.0" text="Voir un exemple de résultat" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
          </children>
       </GridPane>
    </children>
