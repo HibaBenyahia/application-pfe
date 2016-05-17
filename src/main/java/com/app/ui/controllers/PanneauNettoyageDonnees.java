@@ -69,13 +69,13 @@ public class PanneauNettoyageDonnees {
     private Button btnVoirExempleResultat;
 
     @FXML
-    private void demarrerNettoyage(){
+    private void demarrerNettoyage() {
         TaskNettoyeurDeTweet taskNettoyeurDeTweet = new TaskNettoyeurDeTweet();
         new Thread(taskNettoyeurDeTweet).start();
     }
 
     @FXML
-    private void voirExempleResultat(){
+    private void voirExempleResultat() {
         System.out.println("Voir un exemple du résultat");
         showPopupExempleNettoyage();
     }
@@ -90,49 +90,77 @@ public class PanneauNettoyageDonnees {
             PopOver popOver = new PopOver();
             popOver.setTitle("Exemple d'un tweet nettoyé");
             popOver.setHeaderAlwaysVisible(true);
-            popOver.show( btnVoirExempleResultat );
+            popOver.show(btnVoirExempleResultat);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(ClassLoader.getSystemClassLoader().getResource("fxml/"+PANNEAU_POPUP_EXEMPLE_NETTOYAGE));
+            FXMLLoader fxmlLoader = new FXMLLoader(ClassLoader.getSystemClassLoader().getResource("fxml/" + PANNEAU_POPUP_EXEMPLE_NETTOYAGE));
             Parent root = (Parent) fxmlLoader.load();
 
 
             PanneauPopupExempleNettoyage panneauPopupExempleNettoyage = fxmlLoader.getController();
-            panneauPopupExempleNettoyage.setTweetAvantNettoyage( tweetAvantNettoyage );
-            panneauPopupExempleNettoyage.setTweetApresNettoyage( tweetApresNettoyage );
+            panneauPopupExempleNettoyage.setTweetAvantNettoyage(tweetAvantNettoyage);
+            panneauPopupExempleNettoyage.setTweetApresNettoyage(tweetApresNettoyage);
 
             popOver.setContentNode(root);
 
         } catch (Exception e) {
-            ErrorHelper.showErrorDialog( e );
+            ErrorHelper.showErrorDialog(e);
         }
     }
 
     //une classe qui comporte 8 methodes
-    private class TaskNettoyeurDeTweet extends Task{
+    private class TaskNettoyeurDeTweet extends Task {
 
         @Override
         protected Object call() throws Exception {
 
             eleminerLesTweetsSupperflus();
-
+            eliminerLesTweetsRepetes();
 
             return null;
         }
 
         private void eleminerLesTweetsSupperflus() {
 
-            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissage().size() ; i++) {
+            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissage().size(); i++) {
                 Tweet tweetdApprentissage = PIPELINE.getListeDeTweetsApprentissage().get(i);
-                if( ! tweetdApprentissage.getLangue().equals("en")){
-                    PIPELINE.supprimerLeTweetDapprentissage( tweetdApprentissage );
+                if (tweetdApprentissage.getLangue().equals("en")) { //si le tweet anglais
+                    PIPELINE.ajouterUnTweetdApprentissageAlaListeNottoyee(tweetdApprentissage); //on l'ajout a la liste des tweets nettoyés
                 }
                 double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
                 Platform.runLater(() -> pbSupprimerTweetsSupperflus.setProgress(progress));
             }
         }
 
+        private void eliminerLesTweetsRepetes() {
+
+
+            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+
+                int nbrRepetitionsDuTweeti = 0; // hada un conteur de répétition  de chaque tweet donc sa place ici..
+                Tweet tweetApprentissage = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i); //j'ai récupéré le tweet nume i
+
+                //si il n'existe pas dans la liste nettoyer alors ajouté sinon supprimé koi! tu recupere le men liste puis tu test si il existe plusieurs fois si o u i    tu élémine les duppliqués  hakdak le traitment ykoun grave lents kifech ndirr !! a toi de trouver l'algorithme optimal ;)ok
+                for (int j = 0; j < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); j++) {
+                    Tweet tweetAtester = PIPELINE.getListeDeTweetsApprentissageNettoye().get(j);
+
+                    if (tweetApprentissage.equals(tweetAtester)) {
+                        nbrRepetitionsDuTweeti++;
+                        if (nbrRepetitionsDuTweeti > 1) {
+                            PIPELINE.getListeDeTweetsApprentissageNettoye().remove(i);
+                        }
+                    }
+
+                }
+                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+                Platform.runLater(() -> pbSupprimerTweetsDupliques.setProgress(progress));
+            }
+
+
+
+        }
+
         @Override
-        protected void succeeded(){
+        protected void succeeded() {
             super.succeeded();
             showNotification("Suppression des tweets supperflus a été terminé avec succès !");
         }

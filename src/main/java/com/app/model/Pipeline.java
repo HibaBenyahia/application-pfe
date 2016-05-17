@@ -9,9 +9,19 @@ import javafx.collections.ObservableList;
 public class Pipeline {
 
     private ObservableList<Tweet> listeDeTweetsApprentissage;
+    private ObservableList<Tweet> listeDeTweetsApprentissageNettoye;
 
     public Pipeline() {
         this.listeDeTweetsApprentissage = FXCollections.observableArrayList();
+        this.listeDeTweetsApprentissageNettoye = FXCollections.observableArrayList();
+    }
+
+    public ObservableList<Tweet> getListeDeTweetsApprentissageNettoye() {
+        return listeDeTweetsApprentissageNettoye;
+    }
+
+    public void setListeDeTweetsApprentissageNettoye(ObservableList<Tweet> listeDeTweetsApprentissageNettoye) {
+        this.listeDeTweetsApprentissageNettoye = listeDeTweetsApprentissageNettoye;
     }
 
     public ObservableList<Tweet> getListeDeTweetsApprentissage() {
@@ -24,6 +34,10 @@ public class Pipeline {
 
     public void ajouterUnTweetdApprentissage(Tweet tweetApprentissage){
         this.listeDeTweetsApprentissage.add( tweetApprentissage );
+    }
+
+    public void ajouterUnTweetdApprentissageAlaListeNottoyee(Tweet tweetApprentissage){
+        this.listeDeTweetsApprentissageNettoye.add( tweetApprentissage );
     }
 
 
