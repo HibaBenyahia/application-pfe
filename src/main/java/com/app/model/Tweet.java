@@ -51,6 +51,19 @@ public class Tweet {
         this.sentiment = sentiment;
     }
 
+    public Tweet(Tweet other) {
+        this.id = other.id;
+        this.user = other.user;
+        this.tweettext = other.tweettext;
+        this.location = other.location;
+        this.date = other.date;
+        this.favoris = other.favoris;
+        this.langue = other.langue;
+        this.placename = other.placename;
+        this.retweet = other.retweet;
+        this.sentiment = other.sentiment;
+    }
+
     public String getUser() {
         return user;
     }
