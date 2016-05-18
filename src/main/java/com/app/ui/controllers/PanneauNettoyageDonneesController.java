@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
-import org.controlsfx.control.PopOver;
 import org.controlsfx.control.ToggleSwitch;
 
 import static com.app.helper.NotificationHelper.showNotification;
@@ -79,57 +78,16 @@ public class PanneauNettoyageDonneesController {
         new Thread(taskNettoyeurDeTweet).start();
     }
 
-    @FXML
-    private void voirExempleResultat() {
-        System.out.println("Voir un exemple du résultat");
-        showPopupExempleNettoyage();
-    }
-
-    private void showPopupExempleNettoyage() {
-        try {
-            Tweet tweetAvantNettoyage = new Tweet(); //TODO avoir un vrai tweet avant nettoyage depuis PAIPELINE
-            Tweet tweetApresNettoyage = new Tweet(); //TODO avoir un vrai tweet après nettoyage depuis PAIPELINE
-            tweetAvantNettoyage.setTweettext("Holo holo holololo popopo ppp opopopiiirgge  efgerg zfzg ");
-            tweetApresNettoyage.setTweettext("Holo holo ppp popiiirgge  efgerg zfzg ");
-
-            PopOver popOver = new PopOver();
-            popOver.setTitle("Exemple d'un tweet nettoyé");
-            popOver.setHeaderAlwaysVisible(true);
-            popOver.show(btnVoirExempleResultat);
-
-            FXMLLoader fxmlLoader = new FXMLLoader(ClassLoader.getSystemClassLoader().getResource("fxml/" + PANNEAU_POPUP_EXEMPLE_NETTOYAGE));
-            Parent root = (Parent) fxmlLoader.load();
-
-
-            PanneauPopupExempleNettoyage panneauPopupExempleNettoyage = fxmlLoader.getController();
-            panneauPopupExempleNettoyage.setTweetAvantNettoyage(tweetAvantNettoyage);
-            panneauPopupExempleNettoyage.setTweetApresNettoyage(tweetApresNettoyage);
-
-            popOver.setContentNode(root);
-
-        } catch (Exception e) {
-            ErrorHelper.showErrorDialog(e);
-        }
-    }
 
     @FXML
-    private void showPopupComparaison() {
+    private void showFenetreComparaisonTweets() {
         try {
-
-            PopOver popOver = new PopOver();
-            popOver.setTitle("Comparaison");
-            popOver.setHeaderAlwaysVisible(true);
 
             FXMLLoader fxmlLoader = new FXMLLoader(ClassLoader.getSystemClassLoader().getResource("fxml/" + PANNEAU_POPUP_COMPARAISON_TWEETS));
             Parent root = (Parent) fxmlLoader.load();
 
-
             PanneauPopupComparaisonListeTweetsController panneauPopupComparaisonListeTweetsController = fxmlLoader.getController();
             panneauPopupComparaisonListeTweetsController.afficherLesListesDeTweets();
-
-            //popOver.setContentNode(root);
-            //popOver.setArrowLocation(PopOver.ArrowLocation.RIGHT_CENTER);
-            //popOver.show( btnVoirExempleResultat );
 
             Scene scene = new Scene(root);
             Stage fenetrecomparaison = new Stage();
@@ -137,11 +95,10 @@ public class PanneauNettoyageDonneesController {
             fenetrecomparaison.setTitle("Comparaison entre les tweets originaux et les tweets néttoyés");
             fenetrecomparaison.show();
 
-
-            System.out.println( "Liste des tweets originaux : ");
-            System.out.println( PIPELINE.getListeDeTweetsApprentissage().toString());
-            System.out.println( "Liste des tweets nettoyes : ");
-            System.out.println( PIPELINE.getListeDeTweetsApprentissageNettoye().toString());
+            System.out.println("Liste des tweets originaux : ");
+            System.out.println(PIPELINE.getListeDeTweetsApprentissage().toString());
+            System.out.println("Liste des tweets nettoyes : ");
+            System.out.println(PIPELINE.getListeDeTweetsApprentissageNettoye().toString());
 
         } catch (Exception e) {
             ErrorHelper.showErrorDialog(e);
@@ -181,10 +138,10 @@ public class PanneauNettoyageDonneesController {
 
             for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
 
-                int nbrRepetitionsDuTweeti = 0; // hada un conteur de répétition  de chaque tweet donc sa place ici..
+                int nbrRepetitionsDuTweeti = 0; //un conteur de répétition  de chaque tweet donc sa place ici..
                 Tweet tweetApprentissage = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i); //j'ai récupéré le tweet nume i
 
-                //si il n'existe pas dans la liste nettoyer alors ajouté sinon supprimé koi! tu recupere le men liste puis tu test si il existe plusieurs fois si o u i    tu élémine les duppliqués  hakdak le traitment ykoun grave lents kifech ndirr !! a toi de trouver l'algorithme optimal ;)ok
+                //si il n'existe pas dans la liste nettoyer alors ajouté sinon supprimé
                 for (int j = 0; j < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); j++) {
                     Tweet tweetAtester = PIPELINE.getListeDeTweetsApprentissageNettoye().get(j);
 
@@ -212,44 +169,47 @@ public class PanneauNettoyageDonneesController {
             lecteurFichierEmoticones.recupererLesEmoticones();
 
             //parcours de la liste nettoye
-
             //remplacer les emoticones dans chaque tweet nettoyé par un espace
-
             for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
 
                 String textDeTweetCourant = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
                 for (Emoticone emoticone : lecteurFichierEmoticones.getListeDesEmoticones()) {
-                    //icic le remplacemeny, dsl nroh w nji  okokk ?vas yy a++a ++
+                    //icic le remplacemen
                     textDeTweetCourant = textDeTweetCourant.replace(emoticone.getCode(), " ");
 
                 }
-                PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext( textDeTweetCourant );
+                PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext(textDeTweetCourant);
 
                 double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
                 Platform.runLater(() -> pbSupprimerEmoticones.setProgress(progress));
             }
         }
-        private void eliminerURL(){
+
+        private void eliminerURL() {
 
             for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
-             String tweetApprentissage = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
+
+                String tweetApprentissage = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
+
                 String urlPattern = "((https?|ftp|gopher|telnet|file|Unsure|http):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
 
                 String newChaineCharactere = tweetApprentissage.replaceAll(urlPattern, " ");
+
                 //mettre a jour la chaine de caractere du tweet dans la liste du pipeline
                 PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext(newChaineCharactere);
+
                 double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
                 Platform.runLater(() -> pbSupprimerLiens.setProgress(progress));
 
             }
 
-            }
+        }
 
 
         @Override
         protected void succeeded() {
             super.succeeded();
-            showNotification("Suppression des tweets supperflus a été terminé avec succès !");
+            showNotification("Nettoyage des tweets a été terminé avec succès !");
         }
     }
 }

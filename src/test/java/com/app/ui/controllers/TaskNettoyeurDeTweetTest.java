@@ -17,4 +17,27 @@ public class TaskNettoyeurDeTweetTest {
         System.out.println( newChaineCharactere );
     }
 
+    @Test
+    public void testerEliminationArobas() throws Exception {
+
+        String oldStr = "well @kikooo, i'hink you'r right ! #apple";
+        /* language=RegExp */
+        String arobasRegex = "(?<=^|(?<=[^a-zA-Z0-9-_\\.]))@([A-Za-z]+[A-Za-z0-9]+)";
+
+        String newStr = oldStr.replaceAll( arobasRegex, " " );
+        System.out.println( newStr);
+
+    }
+
+    @Test
+    public void testerEleminationCaractereNonAlphabetique() throws Exception {
+
+        String oldStr = "well @kikooo, i'hink you'r right ! #apple";
+        /* language=RegExp */
+        String nonAlphabetRegex = "[^A-Za-z0-9]";
+
+        String newStr = oldStr.replaceAll( nonAlphabetRegex, " " );
+        System.out.println( newStr);
+
+    }
 }
