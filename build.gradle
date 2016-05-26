@@ -10,14 +10,33 @@ repositories {
 }
 
 dependencies {
+
+    //biblio pour :
+    //tester code source java
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'edu.stanford.nlp', name: 'stanford-corenlp', version: '3.6.0'
+
+
+    //tester interface utilisateur javafx
     testCompile "org.testfx:testfx-core:4.0.+"
     testCompile "org.testfx:testfx-junit:4.0.+"
 
+    //lecture ecriture fichier xml
     compile 'org.jdom:jdom2:2.0.6'
+
+    //lecture ecriture fichiers csv
     compile 'com.univocity:univocity-parsers:2.0.2'
+
+    //driver BDD SQLite
     compile 'org.xerial:sqlite-jdbc:3.8.11.2'
+
+    //plus d'option pour javaFx
     compile 'org.controlsfx:controlsfx:8.40.10'
+
+    //pour les icons
     compile 'de.jensd:fontawesomefx:8.9'
 
+    //pour la lemmatisation et le POS  tagging
+    compile group: 'edu.stanford.nlp', name: 'stanford-corenlp', version: '3.6.0'
+    compile group: 'edu.stanford.nlp', name: 'stanford-corenlp', version: '3.6.0', classifier:'models'
 }

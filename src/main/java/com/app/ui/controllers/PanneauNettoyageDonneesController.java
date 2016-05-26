@@ -93,13 +93,8 @@ public class PanneauNettoyageDonneesController {
             Scene scene = new Scene(root);
             Stage fenetrecomparaison = new Stage();
             fenetrecomparaison.setScene(scene);
-            fenetrecomparaison.setTitle("Comparaison entre les tweets originaux et les tweets néttoyés");
+            fenetrecomparaison.setTitle("Compaéraison entre les tweets originaux et les tweets néttoyés");
             fenetrecomparaison.show();
-
-            System.out.println("Liste des tweets originaux : ");
-            System.out.println(PIPELINE.getListeDeTweetsApprentissage().toString());
-            System.out.println("Liste des tweets nettoyes : ");
-            System.out.println(PIPELINE.getListeDeTweetsApprentissageNettoye().toString());
 
         } catch (Exception e) {
             ErrorHelper.showErrorDialog(e);
@@ -219,7 +214,7 @@ public class PanneauNettoyageDonneesController {
                 String arobasRegex = "(?<=^|(?<=[^a-zA-Z0-9-_\\.]))@([A-Za-z]+[A-Za-z0-9]+)";
 
                 String newStr = tweetAvecUserName.replaceAll(arobasRegex, " ");
-                System.out.println(newStr);
+
                 PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext(newStr);
                 double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
                 Platform.runLater(() -> pbSupprimerArobas.setProgress(progress));

@@ -1,5 +1,8 @@
 package com.app.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.Date;
 
 /**
@@ -17,6 +20,11 @@ public class Tweet {
     private String placename;
     private int retweet;
     private double sentiment;
+
+    private ObservableList<String> listOfLemmasUnGram;
+    private ObservableList<String> listOfPosTags;
+    private ObservableList<String> listOfLemmasBiGram;
+    private ObservableList<String> listOfLemmasTriGram;
 
     public Tweet(String id,
                  String user,
@@ -37,6 +45,15 @@ public class Tweet {
         this.placename = placename;
         this.retweet = retweet;
         this.sentiment = sentiment;
+
+        inistialiserLesListeDeNGram();
+    }
+
+    private void inistialiserLesListeDeNGram() {
+        this.listOfLemmasUnGram = FXCollections.observableArrayList();
+        this.listOfLemmasBiGram = FXCollections.observableArrayList();
+        this.listOfLemmasTriGram = FXCollections.observableArrayList();
+        this.listOfPosTags = FXCollections.observableArrayList();
     }
 
     public Tweet() {
@@ -49,6 +66,8 @@ public class Tweet {
         this.tweettext = tweettext;
         this.langue = langue;
         this.sentiment = sentiment;
+
+        inistialiserLesListeDeNGram();
     }
 
     public Tweet(Tweet other) {
@@ -62,6 +81,11 @@ public class Tweet {
         this.placename = other.placename;
         this.retweet = other.retweet;
         this.sentiment = other.sentiment;
+
+        this.listOfLemmasUnGram = other.listOfLemmasUnGram;
+        this.listOfPosTags = other.listOfPosTags;
+        this.listOfLemmasBiGram = other.listOfLemmasBiGram;
+        this.listOfLemmasTriGram = other.listOfLemmasTriGram;
     }
 
     public String getUser() {
@@ -146,6 +170,37 @@ public class Tweet {
         this.sentiment = sentiment;
     }
 
+    public ObservableList<String> getListOfLemmasUnGram() {
+        return listOfLemmasUnGram;
+    }
+
+    public void setListOfLemmasUnGram(ObservableList<String> listOfLemmasUnGram) {
+        this.listOfLemmasUnGram = listOfLemmasUnGram;
+    }
+
+    public ObservableList<String> getListOfPosTags() {
+        return listOfPosTags;
+    }
+
+    public void setListOfPosTags(ObservableList<String> listOfPosTags) {
+        this.listOfPosTags = listOfPosTags;
+    }
+
+    public ObservableList<String> getListOfLemmasBiGram() {
+        return listOfLemmasBiGram;
+    }
+
+    public void setListOfLemmasBiGram(ObservableList<String> listOfLemmasBiGram) {
+        this.listOfLemmasBiGram = listOfLemmasBiGram;
+    }
+
+    public ObservableList<String> getListOfLemmasTriGram() {
+        return listOfLemmasTriGram;
+    }
+
+    public void setListOfLemmasTriGram(ObservableList<String> listOfLemmasTriGram) {
+        this.listOfLemmasTriGram = listOfLemmasTriGram;
+    }
 
     @Override
     public String toString() {
@@ -153,13 +208,17 @@ public class Tweet {
                 "id='" + id + '\'' +
                 ", user='" + user + '\'' +
                 ", tweettext='" + tweettext + '\'' +
-                ", location=" + (location==null?"":location.toString()) +
+                ", location=" + location +
                 ", date=" + date +
                 ", favoris=" + favoris +
                 ", langue='" + langue + '\'' +
-                ", placename='" + (placename==null?"":placename) + '\'' +
+                ", placename='" + placename + '\'' +
                 ", retweet=" + retweet +
                 ", sentiment=" + sentiment +
+                ", listOfLemmasUnGram=" + listOfLemmasUnGram +
+                ", listOfPosTags=" + listOfPosTags +
+                ", listOfLemmasBiGram=" + listOfLemmasBiGram +
+                ", listOfLemmasTriGram=" + listOfLemmasTriGram +
                 '}';
     }
 

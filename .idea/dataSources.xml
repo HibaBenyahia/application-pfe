@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="815375450">
+    <data-source source="LOCAL" name="DB resultat apprentissage NB" uuid="59481f74-f058-4bb9-a012-beda7b2e1fac">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/src/main/resources/database/nb_resultats_apprentissage.sqlite</jdbc-url>
+    </data-source>
+  </component>
+</project>
