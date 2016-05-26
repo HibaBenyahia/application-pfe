@@ -1,9 +1,12 @@
 package com.app.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import com.app.model.database.Classe;
+import com.app.model.database.Corpus;
+import com.app.model.database.Mot;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
 
 /**
  * Created by Oussama on 26/05/2016.
@@ -40,6 +43,75 @@ public class ConnecteurBaseDeDonnees {
 
     }
 
+    //getListeDeMots
+    public ObservableList<Mot> getListeDeMots(){
+
+        ObservableList<Mot> listeDeMotAretourner = FXCollections.observableArrayList();
+
+        ResultSet resultSet= getResultatDeLaRequete("SELECT * FROM mots");
+        try {
+            while (resultSet.next()){
+                int idMot = resultSet.getInt("id_mot");
+                int idCorpus = resultSet.getInt("id_corpus");
+                String texteMot = resultSet.getString("texte_mot");
+                int nbrApparClassePos = resultSet.getInt("nbr_appr_classe_pos");
+                int nbrApparClasseNeg = resultSet.getInt("nbr_appr_classe_neg");
+                float probaPos = resultSet.getFloat("proba_pos");
+                float probaNeg = resultSet.getFloat("proba_neg");
+                int codeNgram = resultSet.getInt("code_ngram");
+
+                Mot mot= new Mot(idMot, idCorpus, texteMot, nbrApparClassePos, nbrApparClasseNeg, probaPos, probaNeg, codeNgram);
+                listeDeMotAretourner.add(mot);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return listeDeMotAretourner;
+    }
+    //getListeDeCorpus
+    public ObservableList<Corpus> getListeDeCorpus(){
+        ObservableList<Corpus> listeDeCorpusAreourner = FXCollections.observableArrayList();
+        ResultSet resultSet= getResultatDeLaRequete("SELECT  * FROM corpus");
+        try {
+            while(resultSet.next()){
+                int idCorpus = resultSet.getInt("id_corpus");
+                String nomCorpus = resultSet.getString("nom_corpus");
+                int tailleVocabulaire = resultSet.getInt("taille_vocabulaire");
+
+                Corpus corpus = new Corpus(idCorpus, nomCorpus, tailleVocabulaire);
+                listeDeCorpusAreourner.add(corpus);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listeDeCorpusAreourner;
+    }
+    //getListeDeClasses
+    public ObservableList<Classe> getlisteDeClasse(){
+
+        ObservableList<Classe> listeDeClasseArecuperer = FXCollections.observableArrayList();
+        ResultSet resultSet= getResultatDeLaRequete("SELECT * FROM  classe");
+
+        try {
+            while(resultSet.next()){
+                int idClasse = resultSet.getInt("id_classe");
+                int idCorpus = resultSet.getInt("id_corpus");
+                String nomClasse = resultSet.getString("nom_classe");
+                int nbrDeMots = resultSet.getInt("nombre_de_mot");
+                float prior = resultSet.getFloat("prior");
+                Classe classe = new Classe(idClasse, idCorpus, nomClasse, nbrDeMots, prior);
+
+                listeDeClasseArecuperer.add(classe);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listeDeClasseArecuperer;
+    }
     public void afficherLaListeDesClasse(){
 
         ResultSet resultSet = getResultatDeLaRequete( "SELECT * FROM classe" );
