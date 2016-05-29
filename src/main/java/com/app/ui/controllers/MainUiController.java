@@ -23,6 +23,8 @@ public class MainUiController {
     private final String PANNEAU_NETTOYAGE = "panneau_nettoyage_donnees.fxml";
     private final String PANNEAU_EXTRACTION_CARACTERISTIQUE = "panneau_extraction_caracteritique.fxml";
     private final String PANNEAU_APPRENTISSAGE = "panneau_apprentissage.fxml";
+    private final String PANNEAU_PRETRAITEMENT_TWEETS_DE_TEST = "panneau_preparation_tweets_de_test.fxml";
+    private final String PANNEAU_TEST_CLASSIFICATION = "panneau_test_classification.fxml";
 
     @FXML
     private BorderPane panneauPrincipale;
@@ -38,6 +40,10 @@ public class MainUiController {
     private TitledPane tpPreTraitement;
     @FXML
     private TitledPane tpPhaseApprentissage;
+    @FXML
+    private Button btnPreparationTweetTest;
+    @FXML
+    private Button btnTestClassification;
 
     @FXML
     private void afficherPaneauChargementTweets() {
@@ -59,7 +65,15 @@ public class MainUiController {
         chargerUnNouveauPanneau(PANNEAU_APPRENTISSAGE);
     }
 
+    @FXML
+    private void afficherPanneauPretraitementTweetsTest(){
+        chargerUnNouveauPanneau( PANNEAU_PRETRAITEMENT_TWEETS_DE_TEST );
+    }
 
+    @FXML
+    private void afficherPanneauTestClassification(){
+        chargerUnNouveauPanneau( PANNEAU_TEST_CLASSIFICATION );
+    }
     private void chargerUnNouveauPanneau(String nomPanneau) {
         try {
             //charger le panneau depuis son fichier fxml

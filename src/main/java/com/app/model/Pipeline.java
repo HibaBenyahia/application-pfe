@@ -10,10 +10,14 @@ public class Pipeline {
 
     private ObservableList<Tweet> listeDeTweetsApprentissage;
     private ObservableList<Tweet> listeDeTweetsApprentissageNettoye;
+    private ObservableList<Tweet> listeDeTweetsDeTest;
+    private ObservableList<Tweet> listeDeTweetsDeTestNettoye;
 
     public Pipeline() {
         this.listeDeTweetsApprentissage = FXCollections.observableArrayList();
         this.listeDeTweetsApprentissageNettoye = FXCollections.observableArrayList();
+        this.listeDeTweetsDeTest = FXCollections.observableArrayList();
+        this.listeDeTweetsDeTestNettoye = FXCollections.observableArrayList();
     }
 
     public ObservableList<Tweet> getListeDeTweetsApprentissageNettoye() {
@@ -32,12 +36,36 @@ public class Pipeline {
         this.listeDeTweetsApprentissage = listeDeTweetsApprentissage;
     }
 
+    public ObservableList<Tweet> getListeDeTweetsDeTest() {
+        return listeDeTweetsDeTest;
+    }
+
+    public void setListeDeTweetsDeTest(ObservableList<Tweet> listeDeTweetsDeTest) {
+        this.listeDeTweetsDeTest = listeDeTweetsDeTest;
+    }
+
+    public ObservableList<Tweet> getListeDeTweetsDeTestNettoye() {
+        return listeDeTweetsDeTestNettoye;
+    }
+
+    public void setListeDeTweetsDeTestNettoye(ObservableList<Tweet> listeDeTweetsDeTestNettoye) {
+        this.listeDeTweetsDeTestNettoye = listeDeTweetsDeTestNettoye;
+    }
+
     public void ajouterUnTweetdApprentissage(Tweet tweetApprentissage){
         this.listeDeTweetsApprentissage.add( tweetApprentissage );
     }
 
+    public void ajouterUnTweetdDeTest(Tweet tweetdeTest){
+        this.listeDeTweetsDeTest.add( tweetdeTest );
+    }
+
     public void ajouterUnTweetdApprentissageAlaListeNottoyee(Tweet tweetApprentissage){
         this.listeDeTweetsApprentissageNettoye.add( tweetApprentissage );
+    }
+
+    public void ajouterUnTweetdeTestAlaListeNottoyee(Tweet tweetDeTestNettoye){
+        this.listeDeTweetsDeTestNettoye.add( tweetDeTestNettoye );
     }
 
 

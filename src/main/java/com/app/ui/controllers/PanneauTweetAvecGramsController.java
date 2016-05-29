@@ -29,6 +29,8 @@ public class PanneauTweetAvecGramsController {
     private FontAwesomeIconView faivIconCle;
     @FXML
     private Pane pCouleurSentiment;
+    @FXML
+    private Text txtTweetPosTags;
 
 
 
@@ -62,7 +64,9 @@ public class PanneauTweetAvecGramsController {
         txtUser.setText( tweet.getUser() );
         txtTweetText.setText( tweet.getTweettext() );
         txtLangue.setText( tweet.getLangue() );
+
         txtTweetUnGram.setText( tweet.getListOfLemmasUnGram().toString() );
+        txtTweetPosTags.setText( tweet.getListOfPosTags().toString() );
         txtTweetBiGram.setText( tweet.getListOfLemmasBiGram().toString() );
         txtTweetTriGram.setText( tweet.getListOfLemmasTriGram().toString() );
         double sentiment = tweet.getSentiment();
