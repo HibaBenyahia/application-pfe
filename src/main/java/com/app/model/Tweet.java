@@ -20,6 +20,10 @@ public class Tweet {
     private String placename;
     private int retweet;
     private double sentiment;
+    private double probabiliteDeLaClassePositive;
+    private double probabiliteDeLaClasseNegative;
+    private double sentimentApresClassification;
+
 
     private ObservableList<String> listOfLemmasUnGram;
     private ObservableList<String> listOfPosTags;
@@ -47,6 +51,30 @@ public class Tweet {
         this.sentiment = sentiment;
 
         inistialiserLesListeDeNGram();
+    }
+
+    public double getProbabiliteDeLaClassePositive() {
+        return probabiliteDeLaClassePositive;
+    }
+
+    public void setProbabiliteDeLaClassePositive(double probabiliteDeLaClassePositive) {
+        this.probabiliteDeLaClassePositive = probabiliteDeLaClassePositive;
+    }
+
+    public double getProbabiliteDeLaClasseNegative() {
+        return probabiliteDeLaClasseNegative;
+    }
+
+    public void setProbabiliteDeLaClasseNegative(double probabiliteDeLaClasseNegative) {
+        this.probabiliteDeLaClasseNegative = probabiliteDeLaClasseNegative;
+    }
+
+    public double getSentimentApresClassification() {
+        return sentimentApresClassification;
+    }
+
+    public void setSentimentApresClassification(double sentimentApresClassification) {
+        this.sentimentApresClassification = sentimentApresClassification;
     }
 
     private void inistialiserLesListeDeNGram() {
@@ -215,6 +243,9 @@ public class Tweet {
                 ", placename='" + placename + '\'' +
                 ", retweet=" + retweet +
                 ", sentiment=" + sentiment +
+                ", probabiliteDeLaClassePositive=" + probabiliteDeLaClassePositive +
+                ", probabiliteDeLaClasseNegative=" + probabiliteDeLaClasseNegative +
+                ", sentimentApresClassification=" + sentimentApresClassification +
                 ", listOfLemmasUnGram=" + listOfLemmasUnGram +
                 ", listOfPosTags=" + listOfPosTags +
                 ", listOfLemmasBiGram=" + listOfLemmasBiGram +

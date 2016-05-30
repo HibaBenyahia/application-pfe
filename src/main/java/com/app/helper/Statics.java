@@ -19,7 +19,7 @@ public class Statics {
     public static int NOMBRE_DE_TWEETS_DE_TEST = 0;
 
     public static final Pipeline PIPELINE = new Pipeline();
-    public static ConnecteurBaseDeDonnees CONNECTEUR_BASE_DE_DONNEES;
+    public static ConnecteurBaseDeDonnees CONNECTEUR_BASE_DE_DONNEES = new ConnecteurBaseDeDonnees();
 
     public static int N_GRAM_CHOISI = 1;
     public static int DATASET_CHOISI = SANDERS_DATASET;

@@ -2,7 +2,6 @@ package com.app.ui.controllers;
 
 import com.app.model.CalculateurStatistiquesApprentissage;
 import com.app.model.Tweet;
-import com.app.model.database.ConnecteurBaseDeDonnees;
 import com.app.model.database.Mot;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -123,8 +122,6 @@ public class PanneauApprentissageController {
     }
 
     private void creerLeVocabulaire() {
-
-        CONNECTEUR_BASE_DE_DONNEES = new ConnecteurBaseDeDonnees();
 
         for (int i = 0; i < NOMBRE_DE_TWEETS_SANDER; i++) {                                  //parcourir les tweets
             Tweet tweetCourrant = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i);
