@@ -25,6 +25,9 @@ public class MainUiController {
     private final String PANNEAU_APPRENTISSAGE = "panneau_apprentissage.fxml";
     private final String PANNEAU_PRETRAITEMENT_TWEETS_DE_TEST = "panneau_preparation_tweets_de_test.fxml";
     private final String PANNEAU_TEST_CLASSIFICATION = "panneau_test_classification.fxml";
+    private final String PANNEAU_STATISTIQUES_DATASET_APPRENTISSAGE = "panneau_statistiques_dataset.fxml";
+    private final String PANNEAU_STATISTIQUES_RESULTAT_CLASSIFICATION = "panneau_statistiques_classification.fxml";
+    private final String PANNEAU_STATISTIQUES_BENCHMARK = "panneau_statistiques_benchmark.fxml";
 
     @FXML
     private BorderPane panneauPrincipale;
@@ -44,6 +47,27 @@ public class MainUiController {
     private Button btnPreparationTweetTest;
     @FXML
     private Button btnTestClassification;
+    @FXML
+    private Button btnStatDatasetApprentissage;
+    @FXML
+    private Button btnStatResultatClassification;
+    @FXML
+    private Button btnStatBenchmark;
+
+    @FXML
+    private void afficherLesStattitiquesBenchmark(){
+        chargerUnNouveauPanneau( PANNEAU_STATISTIQUES_BENCHMARK );
+    }
+
+    @FXML
+    private void afficherPanneauStatistiqueResultatClassification(){
+        chargerUnNouveauPanneau( PANNEAU_STATISTIQUES_RESULTAT_CLASSIFICATION );
+    }
+
+    @FXML
+    private void afficherPanneauStatistiquesSurDatasetApprentissage(){
+        chargerUnNouveauPanneau( PANNEAU_STATISTIQUES_DATASET_APPRENTISSAGE );
+    }
 
     @FXML
     private void afficherPaneauChargementTweets() {

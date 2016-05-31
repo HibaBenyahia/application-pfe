@@ -1,5 +1,6 @@
 package com.app.helper;
 
+import com.app.model.CalculateurDesStatistiques;
 import com.app.model.Pipeline;
 import com.app.model.database.ConnecteurBaseDeDonnees;
 
@@ -23,6 +24,8 @@ public class Statics {
 
     public static int N_GRAM_CHOISI = 1;
     public static int DATASET_CHOISI = SANDERS_DATASET;
+
+    public static CalculateurDesStatistiques CALCULATEUR_DES_STATISTIQUES = new CalculateurDesStatistiques();
 
 
 }
