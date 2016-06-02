@@ -21,5 +21,6 @@ public class NotificationHelper {
                 .position(Pos.BOTTOM_RIGHT)
                 .onAction(arg0 -> System.out.println("Vous avez cliqué sur la notification!"));
         notificationBuilder.show();
+        System.out.println("succeded");
     }
 }

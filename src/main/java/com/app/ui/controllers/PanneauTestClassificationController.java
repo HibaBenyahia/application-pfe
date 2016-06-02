@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 
-import static com.app.helper.Statics.NOMBRE_DE_TWEETS_DE_TEST;
+import static com.app.helper.Statics.NOMBRE_DE_TWEETS_DE_TEST_NETTOYES;
 import static com.app.helper.Statics.PIPELINE;
 
 /**
@@ -51,7 +51,7 @@ public class PanneauTestClassificationController {
 
             ClassificateurDeTweets classificateurDeTweets= new ClassificateurDeTweets();
 
-            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST; i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST_NETTOYES; i++) {
 
                 Tweet tweetAClasser = PIPELINE.getListeDeTweetsDeTestNettoye().get(i);
 
@@ -89,8 +89,20 @@ public class PanneauTestClassificationController {
                     precision ++;
             }
 
-            resultatARetourner = (double) (precision * 100) / (double) NOMBRE_DE_TWEETS_DE_TEST;
+            resultatARetourner = (double) (precision * 100) / (double) NOMBRE_DE_TWEETS_DE_TEST_NETTOYES;
             return resultatARetourner;
+        }
+
+        @Override
+        protected void failed() {
+            super.failed();
+            System.out.println("Failed");
+        }
+
+        @Override
+        protected void cancelled() {
+            super.cancelled();
+            System.out.println("Canceled");
         }
     }
 }

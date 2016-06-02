@@ -14,10 +14,16 @@ public class Statics {
 
     public static final String SANDERS_LEARNING_DATASET = "sanders_learning_dataset.csv";
     public static final String SENTIMENT140_LEARNING_DATASET = "sentiment140_learning_dataset.csv";
+    public static final String SENTIMENT140_TEST_DATASET = "sentiment140_test_dataset.csv";
 
     public static int NUMBER_DE_TWEET_DE_SENTIMENT140 = 1_600_000;
-    public static int NOMBRE_DE_TWEETS_SANDER = 4500;
-    public static int NOMBRE_DE_TWEETS_DE_TEST = 0;
+    public static int NOMBRE_DE_TWEETS_SANDER = 4501;
+    public static int NOMBRE_DE_TWEET_DE_TEST_SENTIMENT140 = 498;
+
+    public static int NOMBRE_DE_TWEETS_D_APPRENTISSAGE;
+    public static int NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
+    public static int NOMBRE_DE_TWEETS_DE_TEST;
+    public static int NOMBRE_DE_TWEETS_DE_TEST_NETTOYES;
 
     public static final Pipeline PIPELINE = new Pipeline();
     public static ConnecteurBaseDeDonnees CONNECTEUR_BASE_DE_DONNEES = new ConnecteurBaseDeDonnees();

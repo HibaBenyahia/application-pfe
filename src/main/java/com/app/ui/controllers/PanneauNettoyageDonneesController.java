@@ -13,12 +13,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controlsfx.control.ToggleSwitch;
 
 import static com.app.helper.NotificationHelper.showNotification;
-import static com.app.helper.Statics.NOMBRE_DE_TWEETS_SANDER;
-import static com.app.helper.Statics.PIPELINE;
+import static com.app.helper.Statics.*;
 
 /**
  * Created by hiba on 10/05/2016.
@@ -72,11 +72,14 @@ public class PanneauNettoyageDonneesController {
     private Button btnDemarrerNettoyage;
     @FXML
     private Button btnVoirExempleResultat;
+    @FXML
+    private Text txtTest;
 
     @FXML
     private void demarrerNettoyage() {
         TaskNettoyeurDeTweet taskNettoyeurDeTweet = new TaskNettoyeurDeTweet();
         new Thread(taskNettoyeurDeTweet).start();
+
     }
 
 
@@ -101,6 +104,9 @@ public class PanneauNettoyageDonneesController {
         }
     }
 
+
+
+
     //une classe qui comporte 8 methodes
     private class TaskNettoyeurDeTweet extends Task {
 
@@ -108,7 +114,7 @@ public class PanneauNettoyageDonneesController {
         protected Object call() throws Exception {
 
             eleminerLesTweetsSupperflus();
-            eliminerLesTweetsRepetes();
+            //eliminerLesTweetsRepetes();
             eliminerURL();
             eliminerNomUtilisateur();
             eliminerEmoticones();
@@ -121,45 +127,50 @@ public class PanneauNettoyageDonneesController {
 
         private void eleminerLesTweetsSupperflus() {
 
-            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissage().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE; i++) {
+
                 Tweet tweetdApprentissage = new Tweet(PIPELINE.getListeDeTweetsApprentissage().get(i));
                 if (tweetdApprentissage.getLangue().equals("en")) { //si le tweet anglais
                     PIPELINE.ajouterUnTweetdApprentissageAlaListeNottoyee(tweetdApprentissage); //on l'ajout a la liste des tweets nettoyés
                 }
-                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+
+                double progress = (double) i / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE;
                 Platform.runLater(() -> pbSupprimerTweetsSupperflus.setProgress(progress));
             }
 
-            //mettre a jour le nombre de tweets de sanders
-            NOMBRE_DE_TWEETS_SANDER = PIPELINE.getListeDeTweetsApprentissageNettoye().size();
+            //mettre a jour le nombre de tweets d'apprentissage nettoye
+            NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES = PIPELINE.getListeDeTweetsApprentissageNettoye().size();
         }
 
         private void eliminerLesTweetsRepetes() {
 
 
-            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {
+                final int inti = i;
+                Platform.runLater(() -> txtTest.setText(inti+""));
 
                 int nbrRepetitionsDuTweeti = 0; //un conteur de répétition  de chaque tweet donc sa place ici..
                 Tweet tweetApprentissage = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i); //j'ai récupéré le tweet nume i
 
                 //si il n'existe pas dans la liste nettoyer alors ajouté sinon supprimé
-                for (int j = 0; j < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); j++) {
+                for (int j = 0; j < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; j++) {
                     Tweet tweetAtester = PIPELINE.getListeDeTweetsApprentissageNettoye().get(j);
 
-                    if (tweetApprentissage.equals(tweetAtester)) {
+                    if (tweetApprentissage.getTweettext().equals(tweetAtester.getTweettext())) {
                         nbrRepetitionsDuTweeti++;
                         if (nbrRepetitionsDuTweeti > 1) {
                             PIPELINE.getListeDeTweetsApprentissageNettoye().remove(i);
+                            break;
                         }
                     }
 
                 }
-                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+                double progress = (double) (i) / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
                 Platform.runLater(() -> pbSupprimerTweetsDupliques.setProgress(progress));
             }
 
             //mettre a jour le nombre de tweets de sanders
-            NOMBRE_DE_TWEETS_SANDER = PIPELINE.getListeDeTweetsApprentissageNettoye().size();
+            NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES = PIPELINE.getListeDeTweetsApprentissageNettoye().size();
 
 
         }
@@ -171,7 +182,7 @@ public class PanneauNettoyageDonneesController {
 
             //parcours de la liste nettoye
             //remplacer les emoticones dans chaque tweet nettoyé par un espace
-            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {
 
                 String textDeTweetCourant = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
                 for (Emoticone emoticone : lecteurFichierEmoticones.getListeDesEmoticones()) {
@@ -181,14 +192,16 @@ public class PanneauNettoyageDonneesController {
                 }
                 PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext(textDeTweetCourant);
 
-                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+                double progress = (double) (i) / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
                 Platform.runLater(() -> pbSupprimerEmoticones.setProgress(progress));
+
+                System.out.println(i );
             }
         }
 
         private void eliminerURL() {
 
-            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {
 
                 String tweetApprentissage = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
 
@@ -199,7 +212,7 @@ public class PanneauNettoyageDonneesController {
                 //mettre a jour la chaine de caractere du tweet dans la liste du pipeline
                 PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext(newChaineCharactere);
 
-                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+                double progress = (double) (i) / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
                 Platform.runLater(() -> pbSupprimerLiens.setProgress(progress));
 
             }
@@ -208,7 +221,7 @@ public class PanneauNettoyageDonneesController {
 
         private void eliminerNomUtilisateur() {
 
-            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {
                 String tweetAvecUserName = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
 
                 String arobasRegex = "(?<=^|(?<=[^a-zA-Z0-9-_\\.]))@([A-Za-z]+[A-Za-z0-9]+)";
@@ -216,7 +229,8 @@ public class PanneauNettoyageDonneesController {
                 String newStr = tweetAvecUserName.replaceAll(arobasRegex, " ");
 
                 PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext(newStr);
-                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+
+                double progress = (double) (i) / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
                 Platform.runLater(() -> pbSupprimerArobas.setProgress(progress));
 
 
@@ -226,7 +240,7 @@ public class PanneauNettoyageDonneesController {
         }
 
         private void eliminerPonctuation() {
-            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {
 
                 String tweetAvecPonctuation = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
                 String nonAlphabetRegex = "[^A-Za-z0-9]";
@@ -234,7 +248,7 @@ public class PanneauNettoyageDonneesController {
                 String newStr = tweetAvecPonctuation.replaceAll(nonAlphabetRegex, " ");
                 PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext(newStr);
 
-                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+                double progress = (double) (i) / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
                 Platform.runLater(() -> pbSupprimerPonctuation.setProgress(progress));
 
             }
@@ -244,7 +258,7 @@ public class PanneauNettoyageDonneesController {
 
             LecteurFichierMotsVides lecteurFichierMotsVides = new LecteurFichierMotsVides();
             lecteurFichierMotsVides.recupererMotVidesAnglais();
-            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {
 
 
                 String tweetText = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
@@ -253,7 +267,8 @@ public class PanneauNettoyageDonneesController {
                 }
 
                 PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext(tweetText);
-                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+
+                double progress = (double) (i) / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
                 Platform.runLater(() -> pbEliminerMotVide.setProgress(progress));
 
             }
@@ -261,11 +276,12 @@ public class PanneauNettoyageDonneesController {
 
         private void normaliser(){
 
-            for (int i = 0; i < PIPELINE.getListeDeTweetsApprentissageNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {
+
                 String tweetText = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).getTweettext();
                 tweetText = tweetText.toLowerCase();
                 PIPELINE.getListeDeTweetsApprentissageNettoye().get(i).setTweettext( tweetText);
-                double progress = i * 100 / NOMBRE_DE_TWEETS_SANDER;
+                double progress = (double) i / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
                 Platform.runLater(() -> pbNormaliserText.setProgress(progress));
 
             }
@@ -275,6 +291,18 @@ public class PanneauNettoyageDonneesController {
         protected void succeeded() {
             super.succeeded();
             showNotification("Nettoyage des tweets a été terminé avec succès !");
+        }
+
+        @Override
+        protected void failed() {
+            super.failed();
+            System.out.println("failed");
+        }
+
+        @Override
+        protected void cancelled() {
+            super.cancelled();
+            System.out.println("canceled");
         }
     }
 }

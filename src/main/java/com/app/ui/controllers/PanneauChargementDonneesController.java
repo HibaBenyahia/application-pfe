@@ -12,10 +12,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 
 import static com.app.helper.NotificationHelper.showNotification;
-import static com.app.helper.Statics.NOMBRE_DE_TWEETS_SANDER;
+import static com.app.helper.Statics.*;
 
 
 /**
@@ -34,7 +35,10 @@ public class PanneauChargementDonneesController {
     @FXML
     private ProgressBar pbChargement;
     @FXML
+    private ToggleGroup tgGroupeDeBouttonDeChoix;
 
+
+    @FXML
     private void chargerLesDonnees(){
         TaskChargeurDeTweet taskChargeurDeTweet = new TaskChargeurDeTweet();
         new Thread( taskChargeurDeTweet ).start();
@@ -43,14 +47,33 @@ public class PanneauChargementDonneesController {
 
 
     private class TaskChargeurDeTweet extends Task{
+        private int nbtTweetNeg = 0;
 
         @Override
         protected Object call() throws Exception {
 
+            enregistrerLeChoixDeDataset();
+            chergerLesTweets();
+
+
+            return null;
+
+        }
+
+        private void chergerLesTweets() {
             //lire fichier CSV en Streaming (3 instructions)
             CsvParserSettings settings = new CsvParserSettings();
             CsvParser csvParser = new CsvParser( settings );
-            csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/sanders_learning_dataset.csv").getPath() ) );
+
+            if (DATASET_CHOISI == SANDERS_DATASET){
+                csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/sanders_learning_dataset.csv").getPath() ) );
+                NOMBRE_DE_TWEETS_D_APPRENTISSAGE = NOMBRE_DE_TWEETS_SANDER;
+            }
+            else{
+                csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/sentiment140_learning_dataset.csv").getPath() ) );
+                NOMBRE_DE_TWEETS_D_APPRENTISSAGE = NUMBER_DE_TWEET_DE_SENTIMENT140;
+            }
+
 
             //construire la liste des tweets
             int numeroTweet = 0;
@@ -68,12 +91,20 @@ public class PanneauChargementDonneesController {
                 Statics.PIPELINE.ajouterUnTweetdApprentissage( tweet );
 
                 numeroTweet++;
-                double progress = numeroTweet * 100 / NOMBRE_DE_TWEETS_SANDER;
-                Platform.runLater(() -> pbChargement.setProgress(progress));
+
+                double progress = (double) (numeroTweet) / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE;
+                Platform.runLater(() -> pbChargement.setProgress( progress ));
+
             }
 
-            return null;
+        }
 
+        private void enregistrerLeChoixDeDataset() {
+            if (tgGroupeDeBouttonDeChoix.getToggles().get(0).isSelected()){
+                Statics.DATASET_CHOISI = SANDERS_DATASET;
+            }
+            else
+                Statics.DATASET_CHOISI = SENTIMENT140_DATASET;
         }
 
 
@@ -81,6 +112,23 @@ public class PanneauChargementDonneesController {
         protected void succeeded(){
             super.succeeded();
             showNotification("Chargement de tweets a été terminé avec succès !");
+            System.out.println( PIPELINE.getListeDeTweetsApprentissage().get(2));
+            System.out.println( PIPELINE.getListeDeTweetsApprentissage().get( PIPELINE.getListeDeTweetsApprentissage().size() - 1 )); // dernier element de la liste
+            System.out.println( NOMBRE_DE_TWEETS_D_APPRENTISSAGE );
+            System.out.println(tgGroupeDeBouttonDeChoix.getSelectedToggle().toString());
+            System.out.println( DATASET_CHOISI );
+        }
+
+        @Override
+        protected void failed() {
+            super.failed();
+            System.out.println("failed");
+        }
+
+        @Override
+        protected void cancelled() {
+            super.cancelled();
+            System.out.println("canceled");
         }
     }
 }

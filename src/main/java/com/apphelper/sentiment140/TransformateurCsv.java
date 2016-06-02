@@ -26,7 +26,8 @@ public class TransformateurCsv {
 
         CsvParserSettings settings = new CsvParserSettings();
         CsvParser parser = new CsvParser(settings);
-        parser.beginParsing(getReader("training.1600000.processed.noemoticon.csv"));
+        //parser.beginParsing(getReader("training.1600000.processed.noemoticon.csv"));
+        parser.beginParsing(getReader("testdata.manual.2009.06.14.csv"));
 
         String[] row;
         while ((row = parser.parseNext()) != null) {
@@ -36,7 +37,7 @@ public class TransformateurCsv {
         }
 
         parser.stopParsing();
-        enregistreurFichierCsv.saveAndClose( Statics.SENTIMENT140_LEARNING_DATASET );
+        enregistreurFichierCsv.saveAndClose( Statics.SENTIMENT140_TEST_DATASET );
     }
 
 }

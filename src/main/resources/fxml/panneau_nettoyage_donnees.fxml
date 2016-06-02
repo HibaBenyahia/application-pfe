@@ -260,6 +260,7 @@
          <children>
             <Button fx:id="btnDemarrerNettoyage" mnemonicParsing="false" onAction="#demarrerNettoyage" prefHeight="42.0" prefWidth="156.0" text="Démarrer le nettoyage" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
             <Button fx:id="btnVoirExempleResultat" mnemonicParsing="false" onAction="#showFenetreComparaisonTweets" prefHeight="42.0" prefWidth="189.0" text="Voir un exemple de résultat" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <Text fx:id="txtTest" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </children>

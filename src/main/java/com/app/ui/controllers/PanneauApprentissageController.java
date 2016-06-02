@@ -54,48 +54,6 @@ public class PanneauApprentissageController {
         }
 
 
-        private void calculerLesProbabilite() {
-            CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage = new CalculateurStatistiquesApprentissage();
-
-            //calcul priors des classs
-            calculateurStatistiquesApprentissage.calculerLesPriors();
-            mettreAJourLesPriorsDansBDD( calculateurStatistiquesApprentissage );
-
-            //calcul nombre de mot de chaque classe
-            calculateurStatistiquesApprentissage.calculerLesNombreDeMots();
-            mettreAJourLesNombresDeMotsDansBDD( calculateurStatistiquesApprentissage );
-
-            //calcul de la taille de vocabulaire
-            calculateurStatistiquesApprentissage.calculerLaTailleDeVocabulaire();
-            mettreAJourLaTailleDeVocabulaireDeCorpus( calculateurStatistiquesApprentissage );
-
-            //calcul des probabilites de chaque mot
-            calculerLesProbabilitesDeChaqueMot( calculateurStatistiquesApprentissage);
-        }
-
-        public void calculerLesProbabilitesDeChaqueMot(CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage) {
-            ObservableList<Mot> listDeMotDansLaBDD = CONNECTEUR_BASE_DE_DONNEES.getListeDeMots();
-            for (Mot mot : listDeMotDansLaBDD) {
-
-                mot.setProbaPos( calculateurStatistiquesApprentissage.getProbabilitePositiveDuMot( mot ) );
-                mot.setProbaNeg( calculateurStatistiquesApprentissage.getProbabiliteNegativeDuMot( mot ) );
-
-                CONNECTEUR_BASE_DE_DONNEES.updateLesProbabilitesDuMot( mot );
-            }
-
-        }
-
-        private void mettreAJourLaTailleDeVocabulaireDeCorpus(CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage) {
-            CONNECTEUR_BASE_DE_DONNEES.updateLaTailleDeVocabulaireDeCorpus( calculateurStatistiquesApprentissage );
-        }
-
-        private void mettreAJourLesNombresDeMotsDansBDD(CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage) {
-            CONNECTEUR_BASE_DE_DONNEES.updateLesNombresDeMotsDesClasses( calculateurStatistiquesApprentissage );
-        }
-
-        private void mettreAJourLesPriorsDansBDD(CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage) {
-            CONNECTEUR_BASE_DE_DONNEES.updateLesPriorsDesClasses( calculateurStatistiquesApprentissage);
-        }
 
 
         @Override
@@ -123,7 +81,7 @@ public class PanneauApprentissageController {
 
     private void creerLeVocabulaire() {
 
-        for (int i = 0; i < NOMBRE_DE_TWEETS_SANDER; i++) {                                  //parcourir les tweets
+        for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {                                  //parcourir les tweets
             Tweet tweetCourrant = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i);
 
             if (tweetCourrant.getSentiment() == -1.0d || tweetCourrant.getSentiment() == 1.0d){   //on prend que les tweets positif et negatif
@@ -156,6 +114,50 @@ public class PanneauApprentissageController {
         }
 
     }
+
+    private void calculerLesProbabilite() {
+        CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage = new CalculateurStatistiquesApprentissage();
+
+        //calcul priors des classs
+        calculateurStatistiquesApprentissage.calculerLesPriors();
+        mettreAJourLesPriorsDansBDD( calculateurStatistiquesApprentissage );
+
+        //calcul nombre de mot de chaque classe
+        calculateurStatistiquesApprentissage.calculerLesNombreDeMots();
+        mettreAJourLesNombresDeMotsDansBDD( calculateurStatistiquesApprentissage );
+
+        //calcul de la taille de vocabulaire
+        calculateurStatistiquesApprentissage.calculerLaTailleDeVocabulaire();
+        mettreAJourLaTailleDeVocabulaireDeCorpus( calculateurStatistiquesApprentissage );
+
+        //calcul des probabilites de chaque mot
+        calculerLesProbabilitesDeChaqueMot( calculateurStatistiquesApprentissage);
+    }
+
+    public void calculerLesProbabilitesDeChaqueMot(CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage) {
+        ObservableList<Mot> listDeMotDansLaBDD = CONNECTEUR_BASE_DE_DONNEES.getListeDeMots();
+        for (Mot mot : listDeMotDansLaBDD) {
+
+            mot.setProbaPos( calculateurStatistiquesApprentissage.getProbabilitePositiveDuMot( mot ) );
+            mot.setProbaNeg( calculateurStatistiquesApprentissage.getProbabiliteNegativeDuMot( mot ) );
+
+            CONNECTEUR_BASE_DE_DONNEES.updateLesProbabilitesDuMot( mot );
+        }
+
+    }
+
+    private void mettreAJourLaTailleDeVocabulaireDeCorpus(CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage) {
+        CONNECTEUR_BASE_DE_DONNEES.updateLaTailleDeVocabulaireDeCorpus( calculateurStatistiquesApprentissage );
+    }
+
+    private void mettreAJourLesNombresDeMotsDansBDD(CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage) {
+        CONNECTEUR_BASE_DE_DONNEES.updateLesNombresDeMotsDesClasses( calculateurStatistiquesApprentissage );
+    }
+
+    private void mettreAJourLesPriorsDansBDD(CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage) {
+        CONNECTEUR_BASE_DE_DONNEES.updateLesPriorsDesClasses( calculateurStatistiquesApprentissage);
+    }
+
 
     private void ajouterUnNouveauMot(Mot mot) {
         CONNECTEUR_BASE_DE_DONNEES.ajouterUnMot( mot );

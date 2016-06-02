@@ -18,14 +18,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 
-import static com.app.helper.Statics.NOMBRE_DE_TWEETS_DE_TEST;
-import static com.app.helper.Statics.NOMBRE_DE_TWEETS_SANDER;
-import static com.app.helper.Statics.PIPELINE;
+import static com.app.helper.Statics.*;
 
 /**
  * Created by Oussama on 29/05/2016.
  */
-public class PanneauPretraitementTweetsTest {
+public class PanneauPretraitementTweetsTestController {
 
     @FXML
     private ProgressBar pbChargementTweetsTest;
@@ -108,7 +106,7 @@ public class PanneauPretraitementTweetsTest {
 
             Platform.runLater(() -> pbNettoyageTweetsTest.setProgress( -1.0f ));
             eleminerLesTweetsSupperflus();
-            eliminerLesTweetsRepetes();
+            //eliminerLesTweetsRepetes();
             eliminerURL();
             eliminerNomUtilisateur();
             eliminerEmoticones();
@@ -121,7 +119,7 @@ public class PanneauPretraitementTweetsTest {
         }
 
         private void eliminerPonctuation() {
-            for (int i = 0; i < PIPELINE.getListeDeTweetsDeTestNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST_NETTOYES; i++) {
 
                 String tweetAvecPonctuation = PIPELINE.getListeDeTweetsDeTestNettoye().get(i).getTweettext();
                 String nonAlphabetRegex = "[^A-Za-z0-9]";
@@ -135,7 +133,8 @@ public class PanneauPretraitementTweetsTest {
         private void eliminerMotsVide() {
             LecteurFichierMotsVides lecteurFichierMotsVides = new LecteurFichierMotsVides();
             lecteurFichierMotsVides.recupererMotVidesAnglais();
-            for (int i = 0; i < PIPELINE.getListeDeTweetsDeTestNettoye().size(); i++) {
+
+            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST_NETTOYES; i++) {
 
 
                 String tweetText = PIPELINE.getListeDeTweetsDeTestNettoye().get(i).getTweettext();
@@ -149,7 +148,7 @@ public class PanneauPretraitementTweetsTest {
         }
 
         private void normaliser() {
-            for (int i = 0; i < PIPELINE.getListeDeTweetsDeTestNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST_NETTOYES; i++) {
                 String tweetText = PIPELINE.getListeDeTweetsDeTestNettoye().get(i).getTweettext();
                 tweetText = tweetText.toLowerCase();
                 PIPELINE.getListeDeTweetsDeTestNettoye().get(i).setTweettext( tweetText);
@@ -164,7 +163,7 @@ public class PanneauPretraitementTweetsTest {
 
             //parcours de la liste nettoye
             //remplacer les emoticones dans chaque tweet nettoyé par un espace
-            for (int i = 0; i < PIPELINE.getListeDeTweetsDeTestNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST_NETTOYES; i++) {
 
                 String textDeTweetCourant = PIPELINE.getListeDeTweetsDeTestNettoye().get(i).getTweettext();
                 for (Emoticone emoticone : lecteurFichierEmoticones.getListeDesEmoticones()) {
@@ -177,7 +176,7 @@ public class PanneauPretraitementTweetsTest {
         }
 
         private void eliminerNomUtilisateur() {
-            for (int i = 0; i < PIPELINE.getListeDeTweetsDeTestNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST_NETTOYES; i++) {
                 String tweetAvecUserName = PIPELINE.getListeDeTweetsDeTestNettoye().get(i).getTweettext();
 
                 String arobasRegex = "(?<=^|(?<=[^a-zA-Z0-9-_\\.]))@([A-Za-z]+[A-Za-z0-9]+)";
@@ -190,7 +189,7 @@ public class PanneauPretraitementTweetsTest {
         }
 
         private void eliminerURL() {
-            for (int i = 0; i < PIPELINE.getListeDeTweetsDeTestNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST_NETTOYES; i++) {
 
                 String tweetDeTest = PIPELINE.getListeDeTweetsDeTestNettoye().get(i).getTweettext();
 
@@ -205,7 +204,7 @@ public class PanneauPretraitementTweetsTest {
         }
 
         private void eliminerLesTweetsRepetes() {
-            for (int i = 0; i < PIPELINE.getListeDeTweetsDeTestNettoye().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST_NETTOYES; i++) {
 
                 int nbrRepetitionsDuTweeti = 0; //un conteur de répétition  de chaque tweet donc sa place ici..
                 Tweet tweetDeTest = PIPELINE.getListeDeTweetsDeTestNettoye().get(i); //j'ai récupéré le tweet nume i
@@ -214,7 +213,7 @@ public class PanneauPretraitementTweetsTest {
                 for (int j = 0; j < PIPELINE.getListeDeTweetsDeTestNettoye().size(); j++) {
                     Tweet tweetAtester = PIPELINE.getListeDeTweetsDeTestNettoye().get(j);
 
-                    if (tweetDeTest.equals(tweetAtester)) {
+                    if (tweetDeTest.getTweettext().equals(tweetAtester.getTweettext())) {
                         nbrRepetitionsDuTweeti++;
                         if (nbrRepetitionsDuTweeti > 1) {
                             PIPELINE.getListeDeTweetsDeTestNettoye().remove(i);
@@ -225,11 +224,11 @@ public class PanneauPretraitementTweetsTest {
             }
 
             //mettre a jour le nombre de tweets de sanders
-            NOMBRE_DE_TWEETS_DE_TEST = PIPELINE.getListeDeTweetsDeTestNettoye().size();
+            NOMBRE_DE_TWEETS_DE_TEST_NETTOYES = PIPELINE.getListeDeTweetsDeTestNettoye().size();
         }
 
         private void eleminerLesTweetsSupperflus() {
-            for (int i = 0; i < PIPELINE.getListeDeTweetsDeTest().size(); i++) {
+            for (int i = 0; i < NOMBRE_DE_TWEETS_DE_TEST; i++) {
 
                 Tweet tweetdeTest = new Tweet(PIPELINE.getListeDeTweetsDeTest().get(i));
 
@@ -239,15 +238,22 @@ public class PanneauPretraitementTweetsTest {
 
             }
 
+            NOMBRE_DE_TWEETS_DE_TEST_NETTOYES = PIPELINE.getListeDeTweetsDeTestNettoye().size();
+
         }
 
         private void chargerLesTweetsDeTest() {
             //lire fichier CSV en Streaming (3 instructions)
             CsvParserSettings settings = new CsvParserSettings();
             CsvParser csvParser = new CsvParser(settings);
-            csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/sanders_learning_dataset.csv").getPath()));
 
-            NOMBRE_DE_TWEETS_DE_TEST = NOMBRE_DE_TWEETS_SANDER; //TODO nbt de tweet de test depend au dataset choisi
+            if (DATASET_CHOISI == SANDERS_DATASET){
+                csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/sanders_learning_dataset.csv").getPath()));
+                NOMBRE_DE_TWEETS_DE_TEST = NOMBRE_DE_TWEETS_SANDER;
+            }else{
+                csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/sentiment140_test_dataset.csv").getPath()));
+                NOMBRE_DE_TWEETS_DE_TEST = NOMBRE_DE_TWEET_DE_TEST_SENTIMENT140;
+            }
 
             //construire la liste des tweets
             int numeroTweet = 0;
@@ -265,7 +271,7 @@ public class PanneauPretraitementTweetsTest {
                 Statics.PIPELINE.ajouterUnTweetdDeTest(tweet);
 
                 numeroTweet++;
-                double progress = numeroTweet * 100 / NOMBRE_DE_TWEETS_DE_TEST;
+                double progress = (double) numeroTweet / (double) NOMBRE_DE_TWEETS_DE_TEST;
                 Platform.runLater(() -> pbChargementTweetsTest.setProgress(progress));
 
             }
@@ -277,6 +283,18 @@ public class PanneauPretraitementTweetsTest {
             NotificationHelper.showNotification("Prétraitement de tweets de test a été terminé avec succès");
             System.out.println( PIPELINE.getListeDeTweetsDeTestNettoye().size());
             System.out.println( PIPELINE.getListeDeTweetsDeTestNettoye().get(1).toString());
+        }
+
+        @Override
+        protected void failed() {
+            super.failed();
+            System.out.println("failed");
+        }
+
+        @Override
+        protected void cancelled() {
+            super.cancelled();
+            System.out.println("Canceled");
         }
     }
 }

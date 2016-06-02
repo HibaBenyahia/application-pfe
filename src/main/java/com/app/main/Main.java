@@ -30,6 +30,7 @@ public class Main extends Application {
         }
     }
 
+    //java -Xmx1024M -Xms1024M
     public static void main (String [] args){
         launch(args);
     }

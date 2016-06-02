@@ -96,7 +96,7 @@ public class PanneauExtractionCaracteristiquesController {
                 tweet.setListOfLemmasBiGram( diviseurNGram.getListOfBigrams(tweet) );
                 tweet.setListOfLemmasTriGram( diviseurNGram.getListOfTrigrams(tweet) );
 
-                double progress = i * 100 / PIPELINE.getListeDeTweetsApprentissageNettoye().size();
+                double progress = (double) i / (double) PIPELINE.getListeDeTweetsApprentissageNettoye().size();
                 Platform.runLater(() -> pbProgressNgram.setProgress(progress));
             }
         }
@@ -122,10 +122,22 @@ public class PanneauExtractionCaracteristiquesController {
                 tweet.setListOfLemmasUnGram( lemmatiseurStanford.getListeDeLemmas() );
                 tweet.setListOfPosTags( lemmatiseurStanford.getListeDePosTags() );
 
-                double progress = i * 100 / PIPELINE.getListeDeTweetsApprentissageNettoye().size();
+                double progress = (double) i / (double) PIPELINE.getListeDeTweetsApprentissageNettoye().size();
                 Platform.runLater(() -> pbProgressLemmatisation.setProgress(progress));
 
             }
+        }
+
+        @Override
+        protected void failed() {
+            super.failed();
+            System.out.println("failed");
+        }
+
+        @Override
+        protected void cancelled() {
+            super.cancelled();
+            System.out.println("canceled");
         }
     }
 }
