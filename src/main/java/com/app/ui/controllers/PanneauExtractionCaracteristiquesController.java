@@ -14,9 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-import static com.app.helper.Statics.PIPELINE;
+import static com.app.helper.Statics.*;
 
 /**
  * Created by hiba on 10/05/2016.
@@ -41,6 +42,10 @@ public class PanneauExtractionCaracteristiquesController {
     private Button btnDemarrerExtraction;
     @FXML
     private Button btnVoirExempleResultat;
+    @FXML
+    private ToggleGroup tgLemmatisationChoix;
+    @FXML
+    private ToggleGroup tgNgramChoix;
 
     @FXML
     private void demarrerExtraction(){
@@ -76,11 +81,29 @@ public class PanneauExtractionCaracteristiquesController {
         @Override
         protected Object call() throws Exception {
 
+            enregistrerLesChoixDeLutilisateur();
             extraireLemmatisation();
             extraireNGram();
 
 
             return null;
+        }
+
+        private void enregistrerLesChoixDeLutilisateur() {
+            //choix de contruction de bag of words
+            if (tgLemmatisationChoix.getToggles().get(0).isSelected()){
+                LEMMA_CHOISI = LEMMATISATION_SEULE;
+            }else {
+                LEMMA_CHOISI = LEMMATISATION_AND_POS;
+            }
+
+            //choix du Ngram
+            if (tgNgramChoix.getToggles().get(0).isSelected()){
+                N_GRAM_CHOISI = UN_GRAM;
+            }else if (tgNgramChoix.getToggles().get(1).isSelected()){
+                N_GRAM_CHOISI = BI_GRAM;
+            }else
+                N_GRAM_CHOISI = TRI_GRAM;
         }
 
         private void extraireNGram() {
@@ -119,8 +142,8 @@ public class PanneauExtractionCaracteristiquesController {
                 lemmatiseurStanford = new LemmatiseurStanford( tweet.getTweettext() );
                 lemmatiseurStanford.appliquerLaLemmatisationEtPosTag();
 
-                tweet.setListOfLemmasUnGram( lemmatiseurStanford.getListeDeLemmas() );
                 tweet.setListOfPosTags( lemmatiseurStanford.getListeDePosTags() );
+                tweet.setListOfLemmasUnGram( lemmatiseurStanford.getListeDeLemmas() );
 
                 double progress = (double) i / (double) PIPELINE.getListeDeTweetsApprentissageNettoye().size();
                 Platform.runLater(() -> pbProgressLemmatisation.setProgress(progress));

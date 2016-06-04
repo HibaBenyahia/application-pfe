@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -45,12 +46,15 @@
           <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ToggleButton fx:id="tbLemmatisation" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" text="Lemmatisation" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+            <ToggleButton fx:id="tbLemmatisation" mnemonicParsing="false" prefHeight="40.0" prefWidth="118.0" selected="true" text="Lemmatisation" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin>
+               <toggleGroup>
+                  <ToggleGroup fx:id="tgLemmatisationChoix" />
+               </toggleGroup>
             </ToggleButton>
-            <ToggleButton fx:id="tbLemmatisationPos" mnemonicParsing="false" prefHeight="40.0" prefWidth="151.0" text="Lemmatisation + POS" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <ToggleButton fx:id="tbLemmatisationPos" mnemonicParsing="false" prefHeight="40.0" prefWidth="151.0" text="Lemmatisation + POS" toggleGroup="$tgLemmatisationChoix" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
@@ -111,9 +115,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ToggleButton fx:id="tbUnGram" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="1 gram" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ToggleButton fx:id="tbBiGram" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Bi gram" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <ToggleButton fx:id="tbTriGram" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Tri gram" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <ToggleButton fx:id="tbUnGram" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="1 gram" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tgNgramChoix" />
+               </toggleGroup></ToggleButton>
+            <ToggleButton fx:id="tbBiGram" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Bi gram" textAlignment="CENTER" toggleGroup="$tgNgramChoix" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <ToggleButton fx:id="tbTriGram" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Tri gram" textAlignment="CENTER" toggleGroup="$tgNgramChoix" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
       <GridPane GridPane.rowIndex="6">

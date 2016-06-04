@@ -11,6 +11,9 @@ import javafx.collections.ObservableList;
 import java.util.List;
 import java.util.Properties;
 
+import static com.app.helper.Statics.LEMMATISATION_AND_POS;
+import static com.app.helper.Statics.LEMMA_CHOISI;
+
 
 /**
  * Created by Oussama on 24/05/2016.
@@ -52,10 +55,23 @@ public class LemmatiseurStanford {
                 // Iterate over all tokens in a sentence
                 for (CoreLabel token : sentence.get(CoreAnnotations.TokensAnnotation.class)) {
 
-                    listeDeLemmas.add(token.get(CoreAnnotations.LemmaAnnotation.class));
                     listeDePosTags.add( token.get(CoreAnnotations.PartOfSpeechAnnotation.class) );
+                    listeDeLemmas.add(token.get(CoreAnnotations.LemmaAnnotation.class));
 
                 }
+            }
+        }
+
+        if (LEMMA_CHOISI == LEMMATISATION_AND_POS)
+            nettoyerListeDeLemma();
+
+    }
+
+    private void nettoyerListeDeLemma() {
+        for (int i = listeDePosTags.size()-1; i >0 ; i--){
+            String posTag = listeDePosTags.get(i);
+            if ( ! (posTag.startsWith("VB") || posTag.startsWith("JJ") || posTag.startsWith("RB")) ){
+                listeDeLemmas.remove(i);
             }
         }
     }

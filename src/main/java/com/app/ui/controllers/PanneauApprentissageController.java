@@ -43,8 +43,6 @@ public class PanneauApprentissageController {
         @Override
         protected Object call() throws Exception {
 
-            Platform.runLater(() -> pbConstructionVocabulaire.setProgress( -1.0f ));
-            Platform.runLater(() -> pbCalculProbabilite.setProgress( -1.0f ));
 
             creerLeVocabulaire();
             calculerLesProbabilite();
@@ -59,7 +57,6 @@ public class PanneauApprentissageController {
         @Override
         protected void succeeded() {
             super.succeeded();
-            pbConstructionVocabulaire.setProgress(1);
             pbCalculProbabilite.setProgress(1);
 
         }
@@ -84,9 +81,17 @@ public class PanneauApprentissageController {
         for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {                                  //parcourir les tweets
             Tweet tweetCourrant = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i);
 
+            ObservableList<String> listeDeNGramChoisie = null;
+
+            switch (N_GRAM_CHOISI){
+                case 1 : listeDeNGramChoisie = tweetCourrant.getListOfLemmasUnGram(); break;
+                case 2 : listeDeNGramChoisie = tweetCourrant.getListOfLemmasBiGram(); break;
+                case 3 : listeDeNGramChoisie = tweetCourrant.getListOfLemmasTriGram(); break;
+            }
+
             if (tweetCourrant.getSentiment() == -1.0d || tweetCourrant.getSentiment() == 1.0d){   //on prend que les tweets positif et negatif
                 //parocurir les gram de chaque tweet (option 1, 2, 3)
-                for (String gram: tweetCourrant.getListOfLemmasUnGram() ) {
+                for (String gram: listeDeNGramChoisie ) {
                     if (existeDansLeVocabulaire(gram)) {
                         //chercher si le gram existe dans la base
                         //Si il existe
@@ -111,11 +116,16 @@ public class PanneauApprentissageController {
                 }
             }
 
+            double progress = (double) i / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
+            Platform.runLater(() -> pbConstructionVocabulaire.setProgress(progress));
+
         }
 
     }
 
     private void calculerLesProbabilite() {
+        Platform.runLater(() -> pbCalculProbabilite.setProgress( -1.0f ));
+
         CalculateurStatistiquesApprentissage calculateurStatistiquesApprentissage = new CalculateurStatistiquesApprentissage();
 
         //calcul priors des classs

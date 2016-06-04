@@ -38,7 +38,7 @@ public class LecteurFichierXml {
         this.nombreTotalTweetARecuperer = 0;
         this.listeDeTweet = new ArrayList<Tweet>();
         this.saxBuilder = new SAXBuilder();
-        this.xmlFile = new File( ClassLoader.getSystemClassLoader().getResource("sanders_dataset_tweets_sentiment.xml").getPath());
+        this.xmlFile = new File( ClassLoader.getSystemClassLoader().getResource("tweets_iphone_se.xml").getPath());
 
         try {
 
@@ -91,7 +91,7 @@ public class LecteurFichierXml {
             }
 
             int retweets = Integer.parseInt( elementTweet.getChildText("retweets") );
-            double sentiment= Double.parseDouble(elementTweet.getChildText("sentiment"));
+            double sentiment= 0; //Double.parseDouble(elementTweet.getChildText("sentiment"));
             nombreTotalTweetARecuperer++;
 
 

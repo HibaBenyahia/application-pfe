@@ -247,12 +247,17 @@ public class PanneauPretraitementTweetsTestController {
             CsvParserSettings settings = new CsvParserSettings();
             CsvParser csvParser = new CsvParser(settings);
 
-            if (DATASET_CHOISI == SANDERS_DATASET){
+            if (TESTSET_CHOISI == SANDERS_TESTSET){
                 csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/sanders_learning_dataset.csv").getPath()));
                 NOMBRE_DE_TWEETS_DE_TEST = NOMBRE_DE_TWEETS_SANDER;
-            }else{
+
+            }else if (TESTSET_CHOISI == SENTIMENT140_TESTSET){
                 csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/sentiment140_test_dataset.csv").getPath()));
                 NOMBRE_DE_TWEETS_DE_TEST = NOMBRE_DE_TWEET_DE_TEST_SENTIMENT140;
+
+            }else if (TESTSET_CHOISI == IPOHONE_SE_TESTSET){
+                csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/test_tweets_iphone_se.csv").getPath()));
+                NOMBRE_DE_TWEETS_DE_TEST = NOMBRE_DE_TWEET_DE_TEST_IPHONE_SE;
             }
 
             //construire la liste des tweets

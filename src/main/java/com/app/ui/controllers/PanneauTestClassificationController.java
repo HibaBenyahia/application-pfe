@@ -1,12 +1,17 @@
 package com.app.ui.controllers;
 
+import com.app.helper.ErrorHelper;
 import com.app.model.ClassificateurDeTweets;
 import com.app.model.Tweet;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
+import javafx.stage.Stage;
 
 import static com.app.helper.Statics.NOMBRE_DE_TWEETS_DE_TEST_NETTOYES;
 import static com.app.helper.Statics.PIPELINE;
@@ -32,6 +37,23 @@ public class PanneauTestClassificationController {
     @FXML
     private void afficherResultat(){
         System.out.println("Afficher le Resultat");
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(ClassLoader.getSystemClassLoader().getResource("fxml/panneau_liste_tweets_classes.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+
+            PanneauListeTweetsClassesController panneauListeTweetsClassesController = fxmlLoader.getController();
+            panneauListeTweetsClassesController.afficherLalisteDesTweets();
+
+            Scene scene = new Scene(root);
+            Stage fenetrecomparaison = new Stage();
+            fenetrecomparaison.setScene(scene);
+            fenetrecomparaison.setTitle("Résultat de classification de tweets de test");
+            fenetrecomparaison.show();
+
+        } catch (Exception e) {
+            ErrorHelper.showErrorDialog(e);
+        }
     }
 
     private class TaskClassifieur extends Task{

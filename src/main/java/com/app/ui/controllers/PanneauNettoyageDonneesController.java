@@ -195,7 +195,6 @@ public class PanneauNettoyageDonneesController {
                 double progress = (double) (i) / (double) NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES;
                 Platform.runLater(() -> pbSupprimerEmoticones.setProgress(progress));
 
-                System.out.println(i );
             }
         }
 

@@ -25,7 +25,7 @@
          </font>
       </Text>
       <Button fx:id="btnAfficherStatDataset" mnemonicParsing="false" onAction="#afficherLesStat" prefHeight="46.0" prefWidth="212.0" text="Afficher les statistiques" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-      <PieChart fx:id="pieChart" prefWidth="421.0" title="Un petit test" GridPane.rowIndex="1" />
+      <PieChart fx:id="pieChart" prefWidth="421.0" GridPane.rowIndex="1" />
       <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
