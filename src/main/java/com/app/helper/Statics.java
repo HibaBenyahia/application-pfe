@@ -16,7 +16,7 @@ public class Statics {
     public static int SANDERS_TESTSET = 1;
     public static int SENTIMENT140_TESTSET = 2;
     public static int IPOHONE_SE_TESTSET = 3;
-    public static int TESTSET_CHOISI = SENTIMENT140_TESTSET;
+    public static int TESTSET_CHOISI = IPOHONE_SE_TESTSET;
 
     public static final String SANDERS_LEARNING_DATASET = "sanders_learning_dataset.csv";
     public static final String SENTIMENT140_LEARNING_DATASET = "sentiment140_learning_dataset.csv";

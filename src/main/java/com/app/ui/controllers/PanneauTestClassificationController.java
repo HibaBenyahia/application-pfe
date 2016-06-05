@@ -1,6 +1,7 @@
 package com.app.ui.controllers;
 
 import com.app.helper.ErrorHelper;
+import com.app.helper.NotificationHelper;
 import com.app.model.ClassificateurDeTweets;
 import com.app.model.Tweet;
 import javafx.application.Platform;
@@ -62,9 +63,7 @@ public class PanneauTestClassificationController {
         @Override
         protected Object call() throws Exception {
 
-            Platform.runLater(() -> piClassification.setProgress( -1.0 ));
             demmarerTestDeClassification();
-            Platform.runLater(() -> piClassification.setProgress( 1.0 ));
 
             return null;
         }
@@ -88,6 +87,9 @@ public class PanneauTestClassificationController {
 
                 //hakda c bn pout cetteq qclass (y) oui doka nekhedmo les methodes^^^^oui:)
                 //dkika brk yokhrjo bah na9der nahder m3ak  okk
+                double progress = (double) i / (double) NOMBRE_DE_TWEETS_DE_TEST_NETTOYES;
+                Platform.runLater(() -> piClassification.setProgress( progress ));
+
 
             }
 
@@ -96,9 +98,9 @@ public class PanneauTestClassificationController {
         @Override
         protected void succeeded() {
             super.succeeded();
-            System.out.println( PIPELINE.getListeDeTweetsDeTestNettoye().get(2).toString() );
-
+            Platform.runLater(() -> piClassification.setProgress( 1.0 ));
             System.out.println( "Evaluation de précision = "+ calculerPrecisionDeClassification() );
+            NotificationHelper.showNotification("Classification a été terminé avec succès !");
         }
 
         private double calculerPrecisionDeClassification() {

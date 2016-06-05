@@ -112,11 +112,6 @@ public class PanneauChargementDonneesController {
         protected void succeeded(){
             super.succeeded();
             showNotification("Chargement de tweets a été terminé avec succès !");
-            System.out.println( PIPELINE.getListeDeTweetsApprentissage().get(2));
-            System.out.println( PIPELINE.getListeDeTweetsApprentissage().get( PIPELINE.getListeDeTweetsApprentissage().size() - 1 )); // dernier element de la liste
-            System.out.println( NOMBRE_DE_TWEETS_D_APPRENTISSAGE );
-            System.out.println(tgGroupeDeBouttonDeChoix.getSelectedToggle().toString());
-            System.out.println( DATASET_CHOISI );
         }
 
         @Override

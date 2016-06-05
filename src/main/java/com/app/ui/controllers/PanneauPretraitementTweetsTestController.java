@@ -3,10 +3,7 @@ package com.app.ui.controllers;
 import com.app.helper.FileHelper;
 import com.app.helper.NotificationHelper;
 import com.app.helper.Statics;
-import com.app.model.DiviseurNGram;
-import com.app.model.Emoticone;
-import com.app.model.LemmatiseurStanford;
-import com.app.model.Tweet;
+import com.app.model.*;
 import com.app.temp.LecteurFichierEmoticones;
 import com.app.temp.LecteurFichierMotsVides;
 import com.sun.org.apache.bcel.internal.util.ClassLoader;
@@ -271,7 +268,19 @@ public class PanneauPretraitementTweetsTestController {
                 String langue = ligneCsv[7];
                 double sentiment = Double.parseDouble(ligneCsv[10]);
 
-                Tweet tweet = new Tweet(idTweet, user, tweettext, langue, sentiment);
+                Location location = null;
+                String latitude = ligneCsv[3];
+                if (!latitude.equals("?")){
+                    String longitude = ligneCsv[4];
+                    location = new Location(latitude, longitude);
+                }
+
+                Tweet tweet = null;
+                if (location == null)
+                    tweet = new Tweet(idTweet, user, tweettext, langue, sentiment);
+                else
+                    tweet = new Tweet(idTweet, user, tweettext, langue, sentiment, location);
+
 
                 Statics.PIPELINE.ajouterUnTweetdDeTest(tweet);
 

@@ -17,6 +17,7 @@
     <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx:8.9" level="project" />
     <orderEntry type="library" name="Gradle: edu.stanford.nlp:stanford-corenlp:3.6.0" level="project" />
     <orderEntry type="library" name="Gradle: edu.stanford.nlp:stanford-corenlp:models:3.6.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.lynden:GMapsFX:1.1.1" level="project" />
     <orderEntry type="library" name="Gradle: org.testfx:testfx-core:4.0.4-alpha" level="project" />
     <orderEntry type="library" name="Gradle: org.testfx:testfx-junit:4.0.4-alpha" level="project" />
     <orderEntry type="library" name="Gradle: com.io7m.xom:xom:1.2.10" level="project" />

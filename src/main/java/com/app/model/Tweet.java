@@ -53,6 +53,17 @@ public class Tweet {
         inistialiserLesListeDeNGram();
     }
 
+    public Tweet(String idTweet, String user, String tweettext, String langue, double sentiment, Location location) {
+        this.id = idTweet;
+        this.user = user;
+        this.tweettext = tweettext;
+        this.langue = langue;
+        this.sentiment = sentiment;
+        this.location = location;
+
+        inistialiserLesListeDeNGram();
+    }
+
     public double getProbabiliteDeLaClassePositive() {
         return probabiliteDeLaClassePositive;
     }

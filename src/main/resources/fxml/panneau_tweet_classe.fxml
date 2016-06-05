@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="236.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.ui.controllers.PanneauTweetClasseController">
+<BorderPane maxHeight="236.0" minHeight="236.0" minWidth="1100.0" prefHeight="236.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.ui.controllers.PanneauTweetClasseController">
    <left>
       <Pane fx:id="pCouleurSentiment" prefHeight="126.0" prefWidth="19.0" style="-fx-background-color: #dd0e0e;" BorderPane.alignment="CENTER" />
    </left>
