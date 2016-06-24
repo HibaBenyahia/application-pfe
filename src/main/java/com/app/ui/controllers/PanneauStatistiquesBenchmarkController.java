@@ -14,6 +14,8 @@ public class PanneauStatistiquesBenchmarkController {
     @FXML
     private Button btnAfficherStat;
     @FXML
+    private Text txtAccuracy;
+    @FXML
     private Text txtPrecision;
     @FXML
     private Text txtRecall;
@@ -26,6 +28,7 @@ public class PanneauStatistiquesBenchmarkController {
 
         CALCULATEUR_DES_STATISTIQUES.calculerBenchmark();
 
+        txtAccuracy.setText(CALCULATEUR_DES_STATISTIQUES.getAccuracy() +"");
         txtPrecision.setText(CALCULATEUR_DES_STATISTIQUES.getPrecision() + "");
         txtRecall.setText( CALCULATEUR_DES_STATISTIQUES.getRecall() + "");
         txtFMesure.setText(CALCULATEUR_DES_STATISTIQUES.getfMesure() +"");

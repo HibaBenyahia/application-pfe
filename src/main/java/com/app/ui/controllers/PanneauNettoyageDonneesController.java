@@ -114,7 +114,7 @@ public class PanneauNettoyageDonneesController {
         protected Object call() throws Exception {
 
             eleminerLesTweetsSupperflus();
-            //eliminerLesTweetsRepetes();
+            eliminerLesTweetsRepetes();
             eliminerURL();
             eliminerNomUtilisateur();
             eliminerEmoticones();
@@ -146,8 +146,6 @@ public class PanneauNettoyageDonneesController {
 
 
             for (int i = 0; i < NOMBRE_DE_TWEETS_D_APPRENTISSAGE_NETTOYES; i++) {
-                final int inti = i;
-                Platform.runLater(() -> txtTest.setText(inti+""));
 
                 int nbrRepetitionsDuTweeti = 0; //un conteur de répétition  de chaque tweet donc sa place ici..
                 Tweet tweetApprentissage = PIPELINE.getListeDeTweetsApprentissageNettoye().get(i); //j'ai récupéré le tweet nume i
@@ -159,7 +157,7 @@ public class PanneauNettoyageDonneesController {
                     if (tweetApprentissage.getTweettext().equals(tweetAtester.getTweettext())) {
                         nbrRepetitionsDuTweeti++;
                         if (nbrRepetitionsDuTweeti > 1) {
-                            PIPELINE.getListeDeTweetsApprentissageNettoye().remove(i);
+                            //PIPELINE.getListeDeTweetsApprentissageNettoye().remove(i);
                             break;
                         }
                     }

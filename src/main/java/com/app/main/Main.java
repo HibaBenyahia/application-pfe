@@ -15,7 +15,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        //System.out.println(getClass().getResource("/com/:"));
         try {
 
         Parent racine = FXMLLoader.load(getClass().getResource("/fxml/main_ui.fxml"));
@@ -30,7 +29,6 @@ public class Main extends Application {
         }
     }
 
-    //java -Xmx1024M -Xms1024M
     public static void main (String [] args){
         launch(args);
     }

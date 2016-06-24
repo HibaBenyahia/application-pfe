@@ -14,6 +14,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ToggleGroup;
 
 import static com.app.helper.Statics.*;
 
@@ -32,6 +33,8 @@ public class PanneauPretraitementTweetsTestController {
     private Button btnDemarrerPreTraitement;
     @FXML
     private Button btnAfficherResultat;
+    @FXML
+    private ToggleGroup tgChoixTestSet;
 
     @FXML
     private void demarrerPreTraitement(){
@@ -243,6 +246,16 @@ public class PanneauPretraitementTweetsTestController {
             //lire fichier CSV en Streaming (3 instructions)
             CsvParserSettings settings = new CsvParserSettings();
             CsvParser csvParser = new CsvParser(settings);
+
+            if (tgChoixTestSet.getToggles().get(0).isSelected()){
+                TESTSET_CHOISI = SANDERS_TESTSET;
+            }else if (tgChoixTestSet.getToggles().get(1).isSelected()){
+                TESTSET_CHOISI = SENTIMENT140_TESTSET;
+            }else if (tgChoixTestSet.getToggles().get(2).isSelected()){
+                TESTSET_CHOISI = IPOHONE_SE_TESTSET;
+            }
+
+            System.out.println( TESTSET_CHOISI );
 
             if (TESTSET_CHOISI == SANDERS_TESTSET){
                 csvParser.beginParsing(FileHelper.getReader(ClassLoader.getSystemClassLoader().getResource("datasets/sanders_learning_dataset.csv").getPath()));

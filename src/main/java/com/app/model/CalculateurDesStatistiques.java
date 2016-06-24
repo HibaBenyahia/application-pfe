@@ -26,9 +26,11 @@ public class CalculateurDesStatistiques {
     private double precision;
     private double recall;
     private double fMesure;
+    private double accuracy;
 
     public void calculerBenchmark(){
 
+        this.accuracy = (double) (truePositives + trueNegatives) / (double) (truePositives + trueNegatives + falsePositives + falseNegatives);
         this.precision =  (double) truePositives/ (double) (truePositives + falsePositives);
         this.recall = (double) truePositives / (double) (truePositives + falseNegatives);
         this.fMesure = 2.0d * precision * recall / (precision + recall);
@@ -261,5 +263,13 @@ public class CalculateurDesStatistiques {
 
     public void setfMesure(double fMesure) {
         this.fMesure = fMesure;
+    }
+
+    public double getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(double accuracy) {
+        this.accuracy = accuracy;
     }
 }

@@ -1,5 +1,6 @@
 package com.app.ui.controllers;
 
+import com.app.helper.NotificationHelper;
 import com.app.model.CalculateurStatistiquesApprentissage;
 import com.app.model.Tweet;
 import com.app.model.database.Mot;
@@ -58,6 +59,7 @@ public class PanneauApprentissageController {
         protected void succeeded() {
             super.succeeded();
             pbCalculProbabilite.setProgress(1);
+            NotificationHelper.showNotification("L'apprentissage a été terminé avec succès !");
 
         }
 

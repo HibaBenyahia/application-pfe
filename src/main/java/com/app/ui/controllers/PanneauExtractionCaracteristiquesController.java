@@ -81,6 +81,9 @@ public class PanneauExtractionCaracteristiquesController {
         @Override
         protected Object call() throws Exception {
 
+            pbProgressLemmatisation.setProgress(0);
+            pbProgressNgram.setProgress(0);
+
             enregistrerLesChoixDeLutilisateur();
             extraireLemmatisation();
             extraireNGram();
